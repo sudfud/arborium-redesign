@@ -1,0 +1,219 @@
+
+arborium_ui.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+8bt
+  rotate: false
+  xy: 515, 704
+  size: 505, 331
+  orig: 505, 331
+  offset: 0, 0
+  index: -1
+exp-bar
+  rotate: false
+  xy: 1536, 1616
+  size: 72, 6
+  split: 3, 3, 3, 2
+  orig: 72, 6
+  offset: 0, 0
+  index: -1
+exp-bar-2
+  rotate: false
+  xy: 1, 423
+  size: 72, 6
+  split: 3, 3, 3, 2
+  orig: 72, 6
+  offset: 0, 0
+  index: -1
+expbarfront1
+  rotate: false
+  xy: 75, 423
+  size: 6, 6
+  split: 3, 0, 3, 2
+  orig: 6, 6
+  offset: 0, 0
+  index: -1
+expbarfront2
+  rotate: false
+  xy: 509, 588
+  size: 4, 6
+  split: 0, 0, 2, 2
+  orig: 4, 6
+  offset: 0, 0
+  index: -1
+expbarfront3
+  rotate: false
+  xy: 59, 415
+  size: 6, 6
+  split: 3, 2, 3, 2
+  orig: 6, 6
+  offset: 0, 0
+  index: -1
+upheaval_0
+  rotate: false
+  xy: 1, 1110
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+upheaval_1
+  rotate: false
+  xy: 1, 596
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+upheaval_2
+  rotate: false
+  xy: 515, 1110
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+8-BIT WONDER
+  rotate: false
+  xy: 515, 1037
+  size: 505, 71
+  orig: 505, 71
+  offset: 0, 0
+  index: -1
+blue_pressed
+  rotate: false
+  xy: 1029, 1184
+  size: 48, 48
+  split: 2, 2, 2, 2
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+blue_pressed_outline
+  rotate: false
+  xy: 1209, 1348
+  size: 48, 48
+  split: 3, 3, 3, 3
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+space
+  rotate: false
+  xy: 1536, 1516
+  size: 48, 48
+  split: 2, 2, 2, 2
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+space_inlay
+  rotate: false
+  xy: 1095, 1254
+  size: 44, 44
+  split: 1, 1, 2, 1
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+dpcomic
+  rotate: false
+  xy: 1, 431
+  size: 505, 88
+  orig: 505, 88
+  offset: 0, 0
+  index: -1
+apple (2)
+  rotate: false
+  xy: 1143, 1332
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+orange
+  rotate: false
+  xy: 515, 638
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+orange (2)
+  rotate: false
+  xy: 515, 620
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+tree2
+  rotate: false
+  xy: 1029, 1234
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+blue
+  rotate: false
+  xy: 581, 654
+  size: 48, 48
+  split: 3, 3, 3, 5
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+button_left
+  rotate: false
+  xy: 1143, 1318
+  size: 14, 12
+  orig: 14, 12
+  offset: 0, 0
+  index: -1
+button_left2x
+  rotate: false
+  xy: 1536, 1566
+  size: 56, 48
+  orig: 56, 48
+  offset: 0, 0
+  index: -1
+button_left3x
+  rotate: false
+  xy: 1029, 1300
+  size: 112, 96
+  orig: 112, 96
+  offset: 0, 0
+  index: -1
+button_right
+  rotate: false
+  xy: 1594, 1602
+  size: 14, 12
+  orig: 14, 12
+  offset: 0, 0
+  index: -1
+button_right2x
+  rotate: false
+  xy: 1, 373
+  size: 56, 48
+  orig: 56, 48
+  offset: 0, 0
+  index: -1
+checked_box
+  rotate: false
+  xy: 1610, 1608
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+comic-large
+  rotate: false
+  xy: 1, 521
+  size: 506, 73
+  orig: 506, 73
+  offset: 0, 0
+  index: -1
+comic-v-large
+  rotate: false
+  xy: 1029, 1398
+  size: 505, 224
+  orig: 505, 224
+  offset: 0, 0
+  index: -1
+unchecked_box
+  rotate: false
+  xy: 1, 357
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1

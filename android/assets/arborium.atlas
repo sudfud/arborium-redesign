@@ -1,0 +1,90 @@
+
+arborium.png
+size: 2048,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+apple2x
+  rotate: false
+  xy: 652, 68
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+apple_tree2x
+  rotate: false
+  xy: 782, 68
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+cherry2x
+  rotate: false
+  xy: 522, 68
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+cherry_tree2x
+  rotate: false
+  xy: 132, 68
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+coin4x
+  rotate: false
+  xy: 2, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+fertilizer8x
+  rotate: false
+  xy: 2, 68
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+orange2x
+  rotate: false
+  xy: 1302, 68
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+orange_tree2x
+  rotate: false
+  xy: 262, 68
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+peach8x
+  rotate: false
+  xy: 1172, 68
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+peach_tree8x
+  rotate: false
+  xy: 1042, 68
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+plant8x
+  rotate: false
+  xy: 912, 68
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+tree8x
+  rotate: false
+  xy: 392, 68
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
