@@ -1,5 +1,6 @@
 package com.mygdx.arborium.screen.shop;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
@@ -22,37 +23,76 @@ import com.mygdx.arborium.screen.GameScreen;
 
 public class ShopScreen extends GameScreen {
 
+    private Queue<String> categoryQueue;
     private Queue<Item> itemQueue;
     private Item currentItem;
 
+    private String category;
+
+    private HorizontalGroup categoryGroup;
+    private Label categoryLabel;
+    private Button categoryLeft;
+    private Button categoryRight;
+
     private HorizontalGroup currencyGroup;
-    private Label currencyLabel;
-    private Window shopWindow;
-    private Image itemImage;
-    private TextureRegionDrawable itemDrawable;
-    private TextButton buyButton;
-    private HorizontalGroup priceGroup;
     private Image coinImage;
-    private Label priceLabel;
+    private Label currencyLabel;
+    private TextButton buyButton;
     private Button itemSelectLeft;
     private Button itemSelectRight;
     private TextButton backButton;
+
+    private ShopEntryWindow treeShop;
 
     public ShopScreen(final Arborium game) {
         super(game);
 
         Skin skin = game.getAssetHandler().getSkin();
 
+        category = "Trees";
+
+        categoryQueue = new Queue<>();
+        categoryQueue.addLast("Trees");
+        categoryQueue.addLast("Fertilizers");
+
+        categoryLabel = new Label(category, skin);
+
         itemQueue = new Queue<>();
-        for (Tree tree : ItemManager.getTreeList()) {
-            itemQueue.addLast(tree);
+        for (Item item : ItemManager.getTreeList()) {
+            itemQueue.addLast(item);
         }
 
-        currentItem = (Tree)itemQueue.removeFirst();
+        currentItem = itemQueue.removeFirst();
         itemQueue.addLast(currentItem);
 
-        shopWindow = new Window("", skin);
-        itemImage = new Image();
+        treeShop = new ShopEntryWindow(game, skin);
+        treeShop.setItem(currentItem);
+
+        categoryGroup = new HorizontalGroup();
+
+        categoryLeft = new Button(skin, "left");
+        categoryLeft.addListener(new ClickListener() {
+           @Override
+           public void clicked(InputEvent event, float x, float y) {
+               category = categoryQueue.removeLast();
+               categoryQueue.addFirst(category);
+               updateCategory();
+           }
+        });
+
+        categoryRight = new Button(skin, "right");
+        categoryRight.addListener(new ClickListener() {
+           @Override
+           public void clicked(InputEvent event, float x, float y) {
+               category = categoryQueue.removeFirst();
+               categoryQueue.addLast(category);
+               updateCategory();
+           }
+        });
+
+        categoryGroup.addActor(categoryLeft);
+        categoryGroup.addActor(categoryLabel);
+        categoryGroup.addActor(categoryRight);
 
         buyButton = new TextButton("Buy", skin);
         buyButton.addListener(new ClickListener() {
@@ -63,20 +103,15 @@ public class ShopScreen extends GameScreen {
             }
         });
 
-        itemDrawable = new TextureRegionDrawable(currentItem.getTexture());
-        itemImage.setDrawable(itemDrawable);
+        updateCategory();
 
-        priceGroup = new HorizontalGroup();
-        coinImage = new Image(game.getAssetHandler().getTexureRegion("coin4x"));
-        priceLabel = new Label("" + ShopManager.getItemPrice(currentItem), skin);
+        coinImage = new Image(new TextureRegionDrawable(game.getAssetHandler().getTexureRegion("coin4x")));
         currencyLabel = new Label("" + CurrencyManager.getAmount(), skin);
         currencyGroup = new HorizontalGroup();
 
         currencyGroup.addActor(coinImage);
         currencyGroup.addActor(currencyLabel);
 
-        priceGroup.addActor(coinImage);
-        priceGroup.addActor(priceLabel);
 
         itemSelectLeft = new Button(skin, "left");
         itemSelectLeft.addListener(new ClickListener() {
@@ -102,25 +137,22 @@ public class ShopScreen extends GameScreen {
         backButton.addListener(new ClickListener() {
            @Override
            public void clicked(InputEvent event, float x, float y) {
-               game.toFarmScreen();
+               game.popScreen();
            }
         });
-
-        shopWindow.add(itemImage);
-        shopWindow.row();
-        shopWindow.add(priceGroup);
-        shopWindow.row();
-        shopWindow.add(buyButton);
-        shopWindow.pack();
-
         UITable.add(currencyGroup).colspan(3);
         UITable.row();
 
+        UITable.add(categoryGroup).colspan(3).pad(50).top();
+        UITable.row();
+
         UITable.add(itemSelectLeft);
-        UITable.add(shopWindow);
+        UITable.add(treeShop).width(Gdx.graphics.getWidth() * 3/4);
         UITable.add(itemSelectRight);
         UITable.row();
-        UITable.add(backButton);
+        UITable.add(buyButton).colspan(3).pad(15).minWidth(Gdx.graphics.getWidth() / 4);
+        UITable.row();
+        UITable.add(backButton).colspan(3).minWidth(Gdx.graphics.getWidth() / 4);
     }
 
     @Override
@@ -131,8 +163,31 @@ public class ShopScreen extends GameScreen {
         stage.draw();
     }
 
+    private void updateCategory() {
+        categoryLabel.setText(category);
+
+        itemQueue.clear();
+        Item[] items;
+        switch(category) {
+            case "Trees":
+            default:
+                items = ItemManager.getTreeList();
+                break;
+            case "Fertilizers":
+                items = ItemManager.getFertilizerList();
+                break;
+        }
+
+        for (Item item : items) {
+                itemQueue.addLast(item);
+        }
+
+        currentItem = itemQueue.removeFirst();
+        itemQueue.addLast(currentItem);
+        updateItem();
+    }
+
     private void updateItem() {
-        itemDrawable.setRegion(currentItem.getTexture());
-        priceLabel.setText(ShopManager.getItemPrice(currentItem));
+        treeShop.setItem(currentItem);
     }
 }

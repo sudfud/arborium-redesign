@@ -153,6 +153,11 @@ TextButtonStyle: {
 		pressedOffsetY: 2
 		checkedOffsetY: 2
 	}
+	disabled: {
+		font: dpcomic-36
+		fontColor: RGBA_209_209_209_255
+		up: blue_pressed
+	}
 }
 TextFieldStyle: {
 	default: {

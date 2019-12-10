@@ -21,7 +21,6 @@ public class CurrencyManager {
 
     public static void add(int amt) {
         amount += amt;
-        Gdx.app.log("Currency", "" + amount);
         save();
     }
 

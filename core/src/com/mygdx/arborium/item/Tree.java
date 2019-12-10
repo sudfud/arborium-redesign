@@ -16,11 +16,11 @@ public class Tree extends Item {
 
     private Preferences preferences;
 
-    public Tree(int id, String name, long growTime, long prodTime,
+    public Tree(int id, String name, String description, long growTime, long prodTime,
                 int prodAmt, int prodValue, int exp, TextureRegion treeTexture,
                 TextureRegion fruitTexture) {
 
-        super(id, name, treeTexture);
+        super(id, name, description, treeTexture);
 
         this.growTime = growTime;
         this.produceTime = prodTime;

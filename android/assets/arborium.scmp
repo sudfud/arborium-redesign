@@ -17,7 +17,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Downloads/PixelUIpack/9-Slice/Colored/blue_pressed.9.png"
@@ -34,7 +33,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Downloads/PixelUIpack/9-Slice/Outline/blue_pressed_outline.9.png"
@@ -51,7 +49,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Downloads/PixelUIpack/9-Slice/space.9.png"
@@ -68,7 +65,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Downloads/PixelUIpack/9-Slice/space_inlay.9.png"
@@ -85,7 +81,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Projects/Arborium/android/assets/button_left.png"
@@ -102,7 +97,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Projects/Arborium/android/assets/button_right.png"
@@ -119,7 +113,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Pictures/orange (2).png"
@@ -136,7 +129,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Pictures/orange.png"
@@ -153,7 +145,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Pictures/tree2.png"
@@ -170,7 +161,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Pictures/apple (2).png"
@@ -187,7 +177,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Projects/Arborium/android/assets/button_left3x.png"
@@ -204,7 +193,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Projects/Arborium/android/assets/button_left2x.png"
@@ -221,7 +209,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Projects/Arborium/android/assets/button_right2x.png"
@@ -238,7 +225,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Projects/Arborium/android/assets/checked_box.png"
@@ -255,7 +241,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Projects/Arborium/android/assets/unchecked_box.png"
@@ -272,7 +257,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Desktop/Arborium/android/assets/skin/exp-bar.9.png"
@@ -289,7 +273,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Desktop/Arborium/android/assets/skin/exp-bar-2.9.png"
@@ -306,7 +289,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Desktop/Arborium/android/assets/skin/expbarfront1.9.png"
@@ -323,7 +305,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Desktop/Arborium/android/assets/skin/expbarfront2.9.png"
@@ -340,7 +321,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Desktop/Arborium/android/assets/skin/expbarfront3.9.png"
@@ -357,7 +337,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 	]
 	fontDrawables: [
@@ -376,7 +355,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Projects/Arborium/android/assets/comic-large.png"
@@ -393,7 +371,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Projects/Arborium/android/assets/comic-v-large.png"
@@ -410,7 +387,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Downloads/dpcomic/dpcomic.png"
@@ -427,7 +403,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Desktop/Arborium/android/assets/skin/8bt.png"
@@ -444,7 +419,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Desktop/Arborium/android/assets/skin/upheaval_0.png"
@@ -461,7 +435,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Desktop/Arborium/android/assets/skin/upheaval_1.png"
@@ -478,7 +451,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 		{
 			file: "/home/sud/Desktop/Arborium/android/assets/skin/upheaval_2.png"
@@ -495,7 +467,6 @@ atlasData: {
 			minWidth: -1
 			minHeight: -1
 			customized: false
-			tenPatchData: null
 		}
 	]
 }
@@ -2851,6 +2822,162 @@ jsonData: {
 				deletable: false
 				parent: null
 			}
+			{
+				class: com.ray3k.skincomposer.data.StyleData
+				name: disabled
+				clazz: com.badlogic.gdx.scenes.scene2d.ui.TextButton
+				properties: {
+					font: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.graphics.g2d.BitmapFont
+						name: font
+						optional: false
+						value: dpcomic-36
+					}
+					fontColor: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.graphics.Color
+						name: fontColor
+						optional: true
+						value: RGBA_209_209_209_255
+					}
+					downFontColor: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.graphics.Color
+						name: downFontColor
+						optional: true
+						value: null
+					}
+					overFontColor: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.graphics.Color
+						name: overFontColor
+						optional: true
+						value: null
+					}
+					checkedFontColor: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.graphics.Color
+						name: checkedFontColor
+						optional: true
+						value: null
+					}
+					checkedOverFontColor: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.graphics.Color
+						name: checkedOverFontColor
+						optional: true
+						value: null
+					}
+					disabledFontColor: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.graphics.Color
+						name: disabledFontColor
+						optional: true
+						value: null
+					}
+					up: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
+						name: up
+						optional: true
+						value: blue_pressed
+					}
+					down: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
+						name: down
+						optional: true
+						value: null
+					}
+					over: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
+						name: over
+						optional: true
+						value: null
+					}
+					focused: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
+						name: focused
+						optional: true
+						value: null
+					}
+					checked: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
+						name: checked
+						optional: true
+						value: null
+					}
+					checkedOver: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
+						name: checkedOver
+						optional: true
+						value: null
+					}
+					checkedFocused: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
+						name: checkedFocused
+						optional: true
+						value: null
+					}
+					disabled: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
+						name: disabled
+						optional: true
+						value: null
+					}
+					pressedOffsetX: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: float
+						name: pressedOffsetX
+						optional: true
+						value: 0
+					}
+					pressedOffsetY: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: float
+						name: pressedOffsetY
+						optional: true
+						value: 0
+					}
+					unpressedOffsetX: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: float
+						name: unpressedOffsetX
+						optional: true
+						value: 0
+					}
+					unpressedOffsetY: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: float
+						name: unpressedOffsetY
+						optional: true
+						value: 0
+					}
+					checkedOffsetX: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: float
+						name: checkedOffsetX
+						optional: true
+						value: 0
+					}
+					checkedOffsetY: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: float
+						name: checkedOffsetY
+						optional: true
+						value: 0
+					}
+				}
+				deletable: true
+				parent: null
+			}
 		]
 		com.badlogic.gdx.scenes.scene2d.ui.TextField: [
 			{
@@ -3155,5 +3282,4 @@ preferences: {
 	}
 }
 saveFile: "/home/sud/Desktop/Arborium/android/assets/arborium.scmp"
-version: 34
 }

@@ -1,8 +1,9 @@
 package com.mygdx.arborium.screen.farm;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.input.GestureDetector;
@@ -28,7 +29,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.arborium.game.Arborium;
@@ -43,14 +43,23 @@ import java.util.Random;
 import java.util.Stack;
 
 public class FarmScreen extends GameScreen {
+
+    private int id;
+
+    private static int totalPlotCount = 0;
+    private ArrayList<Plot> plots;
+
     private Arborium arborium;
+
+    private Preferences preferences;
+
+    private boolean locked;
+    private int farmCost;
 
     // Farm map and its renderer
     private TiledMap tileMap;
     private TiledMapRenderer mapRenderer;
 
-    // The farm's plots
-    private Plot[] plots;
     private Plot focusedPlot;   // The plot we're currently looking at;
 
     // UI
@@ -59,10 +68,16 @@ public class FarmScreen extends GameScreen {
     private Image coin;
     private Label currencyLabel;
     private HorizontalGroup plotInfoGroup;
-    private PlotInfoWindow plotInfoWindow;
+    private FarmScreenTable farmScreenTable;
     private Button leftButton;
     private Button rightButton;
     private TextButton shopButton;
+
+    private Label lockedLabel;
+    private HorizontalGroup priceGroup;
+    private Image coin2;
+    private Label priceLabel;
+    private TextButton unlockButton;
 
     private int currentLevel;
     private Label levelUpLabel;
@@ -105,21 +120,39 @@ public class FarmScreen extends GameScreen {
 
     // TEST
 
-    public FarmScreen(Arborium arborium)
+    public FarmScreen(int id, Arborium arborium, String mapDir)
     {
         super(arborium);
 
+        this.id = id;
+
         this.arborium = arborium;
 
+        preferences = Gdx.app.getPreferences("Farm " + id);
+
+        if (!preferences.contains("locked")) {
+            locked = false;
+            farmCost = 0;
+        }
+
+        else {
+            locked = preferences.getBoolean("locked");
+            farmCost = preferences.getInteger("cost");
+        }
+
         // Map initialization
-        tileMap = new TmxMapLoader().load("map/arborMap2.tmx");
+        tileMap = new TmxMapLoader().load(mapDir);
+        int plotCount = (int)tileMap.getProperties().get("plotCount");
         mapRenderer = new OrthogonalTiledMapRenderer(tileMap, 1 / 64f, spriteBatch);
 
-        plots = new Plot[16];
-        final MapObjects plotObjs = tileMap.getLayers().get(2).getObjects();
-        for (int i = 0; i < plots.length; i++) {
+        if (plots == null) {
+            plots = new ArrayList<>();
+        }
+        final MapObjects plotObjs = tileMap.getLayers().get(3).getObjects();
+        for (int i = 0; i < plotCount; i++) {
             RectangleMapObject rect = (RectangleMapObject) plotObjs.get(i);
-            plots[i] = new Plot(i, rect.getRectangle());
+            plots.add(new Plot(totalPlotCount, rect.getRectangle()));
+            totalPlotCount++;
         }
         focusedPlot = null;
 
@@ -132,34 +165,24 @@ public class FarmScreen extends GameScreen {
         currencyGroup.addActor(coin);
         currencyGroup.addActor(currencyLabel);
 
-        plotInfoWindow = new PlotInfoWindow(this, plots[0], skin);
-        plotInfoWindow.setVisible(false);
+        farmScreenTable = new FarmScreenTable(this, plots.get(0), skin);
+        farmScreenTable.setVisible(false);
 
         leftButton = new Button(skin, "left");
         leftButton.addListener(new ClickListener() {
            @Override
            public void clicked(InputEvent event, float x, float y) {
-               int focusId = focusedPlot.getId();
-               if (focusId > 0) {
-                   focusOn(focusId - 1);
-                   plotInfoWindow.setPlot(plots[focusId - 1]);
-               }
+               game.previousFarmScreen();
            }
         });
-        leftButton.setVisible(false);
 
         rightButton = new Button(skin, "right");
         rightButton.addListener(new ClickListener() {
            @Override
            public void clicked(InputEvent event, float x, float y) {
-               int focusId = focusedPlot.getId();
-               if (focusId < plots.length - 1) {
-                   focusOn(focusId + 1);
-                   plotInfoWindow.setPlot(plots[focusId + 1]);
-               }
+               game.nextFarmScreen();
            }
         });
-        rightButton.setVisible(false);
 
         shopButton = new TextButton("Shop", skin);
         shopButton.addListener(new ClickListener() {
@@ -169,10 +192,6 @@ public class FarmScreen extends GameScreen {
            }
         });
 
-        plotInfoGroup = new HorizontalGroup();
-        plotInfoGroup.addActor(leftButton);
-        plotInfoGroup.addActor(plotInfoWindow);
-        plotInfoGroup.addActor(rightButton);
 
         currentLevel = ExperienceManager.getLevel();
         currentLevelLabel = new Label("Lvl. " + currentLevel, skin);
@@ -187,16 +206,28 @@ public class FarmScreen extends GameScreen {
         barStyle.background.setLeftWidth(0);
         barStyle.background.setRightWidth(0);
 
-        stage.addActor(UITable);
+        lockedLabel = new Label("[LOCKED]", skin);
 
-        UITable.add(currencyGroup).colspan(2).center();
-        UITable.row();
-        UITable.add(plotInfoGroup).expandY().bottom().colspan(2);
-        UITable.row();
-        UITable.add(currentLevelLabel);
-        UITable.add(expBar).padTop(50).padBottom(15).width(Gdx.graphics.getWidth() * 3/4).height(25);
-        UITable.row();
-        UITable.add(shopButton);
+        priceGroup = new HorizontalGroup();
+        coin2 = new Image(game.getAssetHandler().getTexureRegion("coin4x"));
+        priceLabel = new Label("", skin);
+
+        unlockButton = new TextButton("Unlock", skin);
+        unlockButton.addListener(new ClickListener() {
+           @Override
+           public void clicked(InputEvent event, float x, float y) {
+               if (CurrencyManager.getAmount() >= farmCost) {
+                   CurrencyManager.subtract(farmCost);
+                   locked = false;
+                   save();
+                   showUI();
+               }
+           }
+        });
+
+        stage.addActor(UITable);
+        priceGroup.addActor(coin2);
+        priceGroup.addActor(priceLabel);
 
         scoreLabels = new ArrayList<>();
         scoreLabelStack = new Stack<>();
@@ -219,6 +250,17 @@ public class FarmScreen extends GameScreen {
 
         // Sound initialization
         fruitPickSound = Gdx.audio.newSound(Gdx.files.internal("audio/pop1.wav"));
+
+        showUI();
+    }
+
+    public FarmScreen(int id, Arborium arborium, String mapDir, int farmCost) {
+        this(id, arborium, mapDir);
+        if (!preferences.contains("locked")) {
+            locked = true;
+            save();
+        }
+        this.farmCost = farmCost;
     }
 
     @Override
@@ -227,6 +269,10 @@ public class FarmScreen extends GameScreen {
         for (Plot plot : plots) {
             plot.load();
         }
+        if (locked)
+            showLockedUI();
+        else
+            showUI();
     }
 
     @Override
@@ -259,8 +305,8 @@ public class FarmScreen extends GameScreen {
             plot.update();
         }
 
-        if (plotInfoWindow.isVisible()) {
-            plotInfoWindow.update();
+        if (farmScreenTable.isVisible()) {
+            farmScreenTable.update();
         }
 
         // Render map
@@ -291,7 +337,7 @@ public class FarmScreen extends GameScreen {
         // Draw fruits
         if (harvesting) {
 
-            if (fruitCount < focusedPlot.getPlantedTree().getProduceAmount()) {
+            if (fruitCount < focusedPlot.getPlantedTree().getProduceAmount() + focusedPlot.getProduceAmountExtra()) {
 
                 Rectangle bounds = focusedPlot.getBounds();
 
@@ -330,9 +376,8 @@ public class FarmScreen extends GameScreen {
             }
 
             // If we reached the produce amount of this tree, stop harvesting
-            if (focusedPlot.getPlantedTree().getProduceAmount() == fruitCollect) {
+            if (focusedPlot.getPlantedTree().getProduceAmount() +  focusedPlot.getProduceAmountExtra() == fruitCollect) {
                 harvesting = false;
-                Gdx.input.setInputProcessor(stage);
             }
         }
         spriteBatch.end();
@@ -343,6 +388,9 @@ public class FarmScreen extends GameScreen {
 
             camera.zoom = MathUtils.lerp(camera.zoom, toZoom, lerpElapsed);
             lerpElapsed += delta;
+        }
+        else if (lerpElapsed > 1f && toZoom == 7.5f && focusedPlot != null) {
+            focusedPlot = null;
         }
 
         // Update stage
@@ -358,12 +406,10 @@ public class FarmScreen extends GameScreen {
             levelUpLabel.setPosition(0, 0);
             levelUpLabel.getColor().a = 1f;
             levelUpLabel.addAction(Actions.sequence(Actions.parallel(Actions.moveTo(0, 100, 1), Actions.fadeOut(1)),
-                    Actions.run(new Runnable() {
-                        @Override
-                        public void run() {
+                    Actions.run(() -> {
                             levelUpLabel.remove();
                         }
-                    })));
+                    )));
             stage.addActor(levelUpLabel);
             currentLevel = ExperienceManager.getLevel();
             currentLevelLabel.setText("Lvl. " + currentLevel);
@@ -407,30 +453,23 @@ public class FarmScreen extends GameScreen {
         return tileMap;
     }
 
-    public Plot[] getPlots() {
+    public ArrayList<Plot> getPlots() {
         return plots;
     }
 
-    void showPlotInfoWindow(int plotId) {
-        plotInfoWindow.setPlot(plots[plotId]);
-        plotInfoWindow.setVisible(true);
-        leftButton.setVisible(true);
-        rightButton.setVisible(true);
-        Gdx.input.setInputProcessor(stage);
-        focusOn(plotId);
+    void showPlotInfoWindow(Plot plot) {
+        farmScreenTable.setPlot(plot);
+        farmScreenTable.setVisible(true);
+        focusOn(plot);
     }
 
     void hidePlotInfoWindow() {
-        plotInfoWindow.setVisible(false);
-        leftButton.setVisible(false);
-        rightButton.setVisible(false);
-        Gdx.input.setInputProcessor(gestureDetector);
+        farmScreenTable.setVisible(false);
         unfocus();
     }
 
     void beginHarvest() {
         harvesting = true;
-        resetInputProcessor();
         fruitCount = 0;
         fruitCollect = 0;
         makeFruit();
@@ -469,8 +508,8 @@ public class FarmScreen extends GameScreen {
     }
 
     // Center and zoom the camera on a specific plot
-    public void focusOn(int plotId) {
-        focusedPlot = plots[plotId];
+    public void focusOn(Plot plot) {
+        focusedPlot = plot;
 
         Rectangle bounds = focusedPlot.getBounds();
         target = new Vector3((bounds.x + bounds.width/2) / 64, (bounds.y + bounds.height / 2) / 64, 0);
@@ -485,7 +524,7 @@ public class FarmScreen extends GameScreen {
         int mapWidth = tileMap.getProperties().get("width", Integer.class);
         int mapHeight = tileMap.getProperties().get("height", Integer.class);
 
-        target = new Vector3(mapWidth / 2f, mapHeight / 2f, 0);
+        //target = new Vector3(mapWidth / 2f, mapHeight / 2f, 0);
         lerpElapsed = 0;
 
         fromZoom = camera.zoom;
@@ -494,6 +533,46 @@ public class FarmScreen extends GameScreen {
 
     // Call this when you want to regain control of the farm
     public void resetInputProcessor() {
-        Gdx.input.setInputProcessor(gestureDetector);
+        InputMultiplexer inputMulti = new InputMultiplexer();
+        inputMulti.addProcessor(stage);
+        inputMulti.addProcessor(gestureDetector);
+        Gdx.input.setInputProcessor(inputMulti);
+    }
+
+    private void save() {
+        preferences.putBoolean("locked", locked);
+        preferences.putInteger("cost", farmCost);
+        preferences.flush();
+    }
+
+    private void showUI() {
+        UITable.clear();
+        UITable.add(currencyGroup).colspan(3).center();
+        UITable.row();
+        UITable.add(farmScreenTable).colspan(3).expand().bottom();
+        UITable.row();
+        UITable.add(currentLevelLabel);
+        UITable.add(expBar).padTop(50).padBottom(15).width(Gdx.graphics.getWidth() * 3/4).height(25);
+        UITable.row();
+        UITable.add(leftButton);
+        UITable.add(shopButton).size(150, 75);
+        UITable.add(rightButton);
+    }
+
+    private void showLockedUI() {
+        priceLabel.setText("" + farmCost);
+
+        UITable.clear();
+        UITable.add(currencyGroup).colspan(3).center();
+        UITable.row();
+        UITable.add(lockedLabel).colspan(3).expand();
+        UITable.row();
+        UITable.add(priceGroup).colspan(3);
+        UITable.row();
+        UITable.add(unlockButton).colspan(3);
+        UITable.row();
+        UITable.add(leftButton);
+        UITable.add(shopButton).size(150, 75).expandX();
+        UITable.add(rightButton);
     }
 }

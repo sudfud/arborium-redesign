@@ -50,6 +50,10 @@ public class InventoryManager {
 
     }
 
+    public static int getItemAmount(Item item) {
+        return inventory.get(item);
+    }
+
     public static void save(Item item) {
         preferences.putInteger(String.valueOf(item.getId()), inventory.get(item));
         preferences.flush();

@@ -13,6 +13,8 @@ import com.mygdx.arborium.game.ExperienceManager;
 import com.mygdx.arborium.game.Plot;
 import com.mygdx.arborium.item.Tree;
 
+import java.util.ArrayList;
+
 
 public class FarmScreenInputProcessor implements GestureListener {
 
@@ -62,8 +64,8 @@ public class FarmScreenInputProcessor implements GestureListener {
         }
 
         // If we're not harvesting, check if a plot has been tapped
-        else {
-            Plot[] plots = farmScreen.getPlots();
+        else if (!farmScreen.harvesting) {
+            ArrayList<Plot> plots = farmScreen.getPlots();
             for (Plot plot : plots) {
                 Rectangle rect = plot.getBounds();
 
@@ -71,7 +73,7 @@ public class FarmScreenInputProcessor implements GestureListener {
                 worldCoords = farmScreen.getCamera().unproject(screenCoords);
 
                 if (rect.contains(worldCoords.x * 64, worldCoords.y * 64)) {
-                    farmScreen.showPlotInfoWindow(plot.getId());
+                    farmScreen.showPlotInfoWindow(plot);
                 }
             }
         }
@@ -91,6 +93,11 @@ public class FarmScreenInputProcessor implements GestureListener {
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
+        if (farmScreen.getFocusedPlot() == null) {
+            float zoom = farmScreen.getCamera().zoom;
+            farmScreen.getCamera().translate(-deltaX / 256f * zoom, deltaY / 256f * zoom);
+            farmScreen.getCamera().update();
+        }
         return false;
     }
 

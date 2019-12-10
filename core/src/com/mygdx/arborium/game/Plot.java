@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.arborium.item.Fertilizer;
 import com.mygdx.arborium.item.ItemManager;
 import com.mygdx.arborium.item.Tree;
 
@@ -22,8 +23,13 @@ public class Plot implements ISaveable {
     private final String prodAmtMultiKey;
     private final String prodValMultiKey;
     private final String expMultiKey;
+    private final String fertilizerKey;
+
+    private Farm farm;
 
     private Preferences preferences;    // Used to save properties of the plot
+
+    private Fertilizer fertilizer;
 
     private int treeId;
     private Tree plantedTree;
@@ -37,13 +43,9 @@ public class Plot implements ISaveable {
     // Multipliers
     private float matureTimeMultiplier = 1f;
     private float produceTimeMultiplier = 1f;
-    private float produceAmountMultiplier = 1f;
+    private int produceAmountExtra = 0;
     private float produceValueMultiplier = 1f;
     private float expMultiplier = 1f;
-
-    public enum Multiplier {
-        MATURE_TIME, PRODUCE_TIME, PRODUCE_AMT, PRODUCE_VAL, EXP
-    }
 
     private Rectangle bounds;
 
@@ -68,6 +70,7 @@ public class Plot implements ISaveable {
         prodAmtMultiKey = head + "ProduceAmountMultiplier";
         prodValMultiKey = head + "ProduceValueMultiplier";
         expMultiKey = head + "ExpMultiplier";
+        fertilizerKey = head + "Fertilizer";
         load();
     }
 
@@ -78,7 +81,7 @@ public class Plot implements ISaveable {
             case GROWING:
                 // Check to see if the tree is ready to mature
                 timeSincePlanted = TimeUtils.timeSinceMillis(plantedTimestamp);
-                if (timeSincePlanted >= plantedTree.getGrowTime()) {
+                if (timeSincePlanted >= plantedTree.getGrowTime() * matureTimeMultiplier) {
                     currentState = PlotState.MATURE;
                     produceTimestamp = time;
                     save();
@@ -89,7 +92,7 @@ public class Plot implements ISaveable {
             case HARVESTABLE:
                 // Check if the tree is ready to harvest
                 timeSinceLastHarvest = TimeUtils.timeSinceMillis(produceTimestamp);
-                if (currentState != PlotState.HARVESTABLE && timeSinceLastHarvest >= plantedTree.getProduceTime()) {
+                if (currentState != PlotState.HARVESTABLE && timeSinceLastHarvest >= plantedTree.getProduceTime() * produceTimeMultiplier) {
                     currentState = PlotState.HARVESTABLE;
                 }
         }
@@ -110,6 +113,11 @@ public class Plot implements ISaveable {
         save();
     }
 
+    public void fertilize(Fertilizer fert) {
+        fertilizer = fert;
+        fertilizer.activate(this);
+    }
+
     public void clear() {
         currentState = PlotState.EMPTY;
         plantedTree = null;
@@ -123,6 +131,12 @@ public class Plot implements ISaveable {
         plantedTimestamp = preferences.getLong(plantTimeKey, 0);
         produceTimestamp = preferences.getLong(prodTimeKey, 0);
 
+        matureTimeMultiplier = preferences.getFloat(matureMultiKey, 1f);
+        produceTimeMultiplier = preferences.getFloat(prodTimeMultiKey, 1f);
+        produceValueMultiplier = preferences.getFloat(prodValMultiKey, 1f);
+        produceAmountExtra = preferences.getInteger(prodAmtMultiKey, 0);
+        expMultiplier = preferences.getFloat(expMultiKey, 1f);
+
         if (treeId == -1) {
             plantedTree = null;
         }
@@ -130,17 +144,24 @@ public class Plot implements ISaveable {
             plantedTree = (Tree)ItemManager.findItemById(treeId);
             if (currentState == PlotState.GROWING) {
                 timeSincePlanted = TimeUtils.timeSinceMillis(plantedTimestamp);
-                if (timeSincePlanted > plantedTree.getGrowTime()) {
+                if (timeSincePlanted > plantedTree.getGrowTime() * matureTimeMultiplier) {
                     currentState = PlotState.MATURE;
                 }
             }
             if (currentState == PlotState.MATURE) {
                 timeSinceLastHarvest = TimeUtils.timeSinceMillis(produceTimestamp);
-                if (timeSinceLastHarvest > plantedTree.getProduceTime()) {
+                if (timeSinceLastHarvest > plantedTree.getProduceTime() * produceTimeMultiplier) {
                     currentState = PlotState.HARVESTABLE;
                 }
             }
         }
+
+
+        int fertId = preferences.getInteger(fertilizerKey, -1);
+        if (fertId != -1)
+            fertilizer = (Fertilizer)ItemManager.findItemById(fertId);
+        else
+            fertilizer = null;
 
         //updateState();
     }
@@ -153,8 +174,22 @@ public class Plot implements ISaveable {
         preferences.putLong(prodTimeKey, produceTimestamp);
         preferences.putFloat(matureMultiKey, matureTimeMultiplier);
         preferences.putFloat(prodTimeMultiKey, produceTimeMultiplier);
-        preferences.putFloat(prodAmtMultiKey, produceAmountMultiplier);
+        preferences.putInteger(prodAmtMultiKey, produceAmountExtra);
+
+        if (fertilizer != null)
+            preferences.putInteger(fertilizerKey, fertilizer.getId());
+        else
+            preferences.putInteger(fertilizerKey, -1);
+
         preferences.flush();
+    }
+
+    public void resetMultipliers() {
+        matureTimeMultiplier = 1f;
+        produceTimeMultiplier = 1f;
+        produceAmountExtra = 0;
+        produceValueMultiplier = 1f;
+        expMultiplier = 1f;
     }
 
     public int getId() {
@@ -191,12 +226,12 @@ public class Plot implements ISaveable {
     }
 
 
-    public float getProduceAmountMultiplier() {
-        return produceAmountMultiplier;
+    public int getProduceAmountExtra() {
+        return produceAmountExtra;
     }
 
-    public void setProduceAmountMultiplier(float val) {
-        produceAmountMultiplier = val;
+    public void setProduceAmountExtra(int val) {
+        produceAmountExtra = val;
     }
 
 
@@ -215,6 +250,14 @@ public class Plot implements ISaveable {
 
     public void setExpMultiplier(float val) {
         expMultiplier = val;
+    }
+
+    public void setFarm(Farm farm) {
+        this.farm = farm;
+    }
+
+    public boolean isFertilized() {
+        return (fertilizer != null);
     }
 
     // Use this to convert time in milliseconds to a more human-readable format
@@ -256,14 +299,14 @@ public class Plot implements ISaveable {
                 info += "Growing";
                 info += "\nPlanted: " + plantedTree.getName();
                 info += "\nMatures in: " +
-                        timeFormat(plantedTree.getGrowTime() - timeSincePlanted);
+                        timeFormat((long)(plantedTree.getGrowTime() * matureTimeMultiplier) - timeSincePlanted);
                 break;
 
             case MATURE:
                 info += "Mature";
                 info += "\nPlanted: " + plantedTree.getName();
                 info += "\nHarvest in: " +
-                        timeFormat(plantedTree.getProduceTime() - timeSinceLastHarvest);
+                        timeFormat((long)(plantedTree.getProduceTime() * produceTimeMultiplier) - timeSinceLastHarvest);
                 break;
 
             case HARVESTABLE:
