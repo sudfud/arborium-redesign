@@ -1,11 +1,32 @@
 package com.mygdx.arborium.item;
 
-import java.util.function.Function;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 
-public class Upgrade {
+import java.util.function.Function;
+import java.util.function.IntConsumer;
+import java.util.function.Supplier;
+
+public class Upgrade extends Item{
+    private Preferences preferences;
+
+    private boolean locked;
     private boolean enabled;
 
-    public Upgrade(Tree tree, Function<Void, Void> effectFunction) {
-        this.enabled = false;
+    private IntConsumer effectFunction;
+
+    private int price;
+
+    public Upgrade(int id, String name, IntConsumer effectFunction, Supplier<Boolean> unlockCondition, int price) {
+        super(id, name, "", null);
+        preferences = Gdx.app.getPreferences("Upgrades");
+        this.enabled = true;
+        this.effectFunction = effectFunction;
+        apply();
+        this.price = price;
+    }
+
+    public void apply() {
+        effectFunction.accept(getId());
     }
 }

@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 public class ItemManager {
     private static ArrayList<Tree> trees;
     private static ArrayList<Fertilizer> fertilizers;
+    private static ArrayList<Upgrade> upgrades;
     private static HashMap<Integer, Item> itemMap;
 
     public static void init(AssetHandler assetHandler) {
@@ -83,6 +84,18 @@ public class ItemManager {
         for (Fertilizer fert : fertilizers) {
             itemMap.put(fert.getId(), fert);
         }
+
+        upgrades = new ArrayList<>();
+
+        upgrades.add(new Upgrade(64, "Test Upgrade", (id) -> {
+            Tree tree = (Tree)findItemById(1);  // Apple Tree
+            int prodAmount = tree.getProduceAmount();
+            int prodValue = tree.getProduceValue();
+            int exp = tree.getExperience();
+            tree.setProduceAmount(prodAmount * 2);
+            tree.setProduceValue(prodValue * 2);
+            tree.setExperience(exp * 2);
+            }, () -> true, 0));
     }
 
     public static Item findItemById(int id) {
