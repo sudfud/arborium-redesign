@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -38,8 +39,8 @@ public class ShopScreen extends GameScreen {
     private Image coinImage;
     private Label currencyLabel;
     private TextButton buyButton;
-    private Button itemSelectLeft;
-    private Button itemSelectRight;
+    private ImageButton itemSelectLeft;
+    private ImageButton itemSelectRight;
     private TextButton backButton;
 
     private ShopEntryWindow treeShop;
@@ -70,7 +71,7 @@ public class ShopScreen extends GameScreen {
 
         categoryGroup = new HorizontalGroup();
 
-        categoryLeft = new Button(skin, "left");
+        categoryLeft = new ImageButton(skin, "left");
         categoryLeft.addListener(new ClickListener() {
            @Override
            public void clicked(InputEvent event, float x, float y) {
@@ -80,7 +81,7 @@ public class ShopScreen extends GameScreen {
            }
         });
 
-        categoryRight = new Button(skin, "right");
+        categoryRight = new ImageButton(skin, "right");
         categoryRight.addListener(new ClickListener() {
            @Override
            public void clicked(InputEvent event, float x, float y) {
@@ -113,7 +114,7 @@ public class ShopScreen extends GameScreen {
         currencyGroup.addActor(currencyLabel);
 
 
-        itemSelectLeft = new Button(skin, "left");
+        itemSelectLeft = new ImageButton(skin, "left");
         itemSelectLeft.addListener(new ClickListener() {
            @Override
            public void clicked(InputEvent event, float x, float y) {
@@ -123,7 +124,7 @@ public class ShopScreen extends GameScreen {
            }
         });
 
-        itemSelectRight = new Button(skin, "right");
+        itemSelectRight = new ImageButton(skin, "right");
         itemSelectRight.addListener(new ClickListener() {
            @Override
            public void clicked(InputEvent event, float x, float y) {
@@ -150,9 +151,9 @@ public class ShopScreen extends GameScreen {
         UITable.add(treeShop).width(Gdx.graphics.getWidth() * 3/4);
         UITable.add(itemSelectRight);
         UITable.row();
-        UITable.add(buyButton).colspan(3).pad(15).minWidth(Gdx.graphics.getWidth() / 4);
+        UITable.add(buyButton).colspan(3).pad(15).size(150, 75);
         UITable.row();
-        UITable.add(backButton).colspan(3).minWidth(Gdx.graphics.getWidth() / 4);
+        UITable.add(backButton).colspan(3).size(150, 75);
     }
 
     @Override

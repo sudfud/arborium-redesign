@@ -1,0 +1,249 @@
+
+a2.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+16
+  rotate: false
+  xy: 241, 26
+  size: 32, 32
+  split: 12, 13, 16, 15
+  pad: 16, 15, 16, 15
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+window
+  rotate: false
+  xy: 241, 26
+  size: 32, 32
+  split: 12, 13, 16, 15
+  pad: 16, 15, 16, 15
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 615, 58
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+7
+  rotate: false
+  xy: 275, 26
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+712_serif
+  rotate: false
+  xy: 1, 861
+  size: 505, 99
+  orig: 505, 99
+  offset: 0, 0
+  index: -1
+brown
+  rotate: false
+  xy: 1, 10
+  size: 48, 48
+  split: 11, 23, 24, 23
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+brown_inlay
+  rotate: false
+  xy: 151, 14
+  size: 44, 44
+  split: 9, 21, 22, 21
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+green
+  rotate: false
+  xy: 51, 10
+  size: 48, 48
+  split: 3, 3, 3, 5
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+green_pressed
+  rotate: false
+  xy: 101, 10
+  size: 48, 48
+  split: 2, 2, 2, 2
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+greenbutton
+  rotate: false
+  xy: 301, 44
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+greenbutt
+  rotate: false
+  xy: 301, 44
+  size: 14, 14
+  split: 6, 6, 3, 5
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+left
+  rotate: false
+  xy: 241, 18
+  size: 8, 6
+  orig: 8, 6
+  offset: 0, 0
+  index: -1
+pane
+  rotate: false
+  xy: 517, 58
+  size: 96, 96
+  split: 45, 47, 48, 47
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+scroll.png
+  rotate: false
+  xy: 508, 930
+  size: 12, 30
+  split: 5, 5, 3, 3
+  orig: 12, 30
+  offset: 0, 0
+  index: -1
+serif_16
+  rotate: false
+  xy: 509, 989
+  size: 505, 34
+  orig: 505, 34
+  offset: 0, 0
+  index: -1
+serif_outline
+  rotate: false
+  xy: 1, 642
+  size: 505, 217
+  orig: 505, 217
+  offset: 0, 0
+  index: -1
+serif_outline_16
+  rotate: false
+  xy: 1, 962
+  size: 506, 61
+  orig: 506, 61
+  offset: 0, 0
+  index: -1
+712_serif
+  rotate: false
+  xy: 1, 446
+  size: 505, 194
+  orig: 505, 194
+  offset: 0, 0
+  index: -1
+expBar3.png
+  rotate: false
+  xy: 1, 1
+  size: 33, 7
+  split: 9, 9, 3, 3
+  orig: 33, 7
+  offset: 0, 0
+  index: -1
+expamt
+  rotate: false
+  xy: 509, 985
+  size: 32, 2
+  split: 0, 0, 0, 0
+  orig: 32, 2
+  offset: 0, 0
+  index: -1
+apple2x
+  rotate: false
+  xy: 387, 26
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+2-1.png
+  rotate: false
+  xy: 387, 156
+  size: 288, 288
+  orig: 288, 288
+  offset: 0, 0
+  index: -1
+greenboard
+  rotate: false
+  xy: 387, 156
+  size: 288, 288
+  split: 144, 141, 144, 138
+  pad: 55, 54, 144, 138
+  orig: 288, 288
+  offset: 0, 0
+  index: -1
+greenboard2
+  rotate: false
+  xy: 387, 156
+  size: 288, 288
+  split: 144, 141, 144, 138
+  pad: 50, 50, 80, 80
+  orig: 288, 288
+  offset: 0, 0
+  index: -1
+right
+  rotate: false
+  xy: 36, 2
+  size: 8, 6
+  orig: 8, 6
+  offset: 0, 0
+  index: -1
+biggreenboard.png
+  rotate: false
+  xy: 1, 60
+  size: 384, 384
+  split: 192, 186, 192, 189
+  orig: 384, 384
+  offset: 0, 0
+  index: -1
+greenbutton-1.png
+  rotate: false
+  xy: 517, 28
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+greenbutton-1.png(1)
+  rotate: false
+  xy: 197, 16
+  size: 42, 42
+  orig: 42, 42
+  offset: 0, 0
+  index: -1
+biggreenbutt
+  rotate: false
+  xy: 197, 16
+  size: 42, 42
+  split: 18, 18, 9, 15
+  orig: 42, 42
+  offset: 0, 0
+  index: -1
+left-1.png
+  rotate: false
+  xy: 547, 44
+  size: 16, 12
+  orig: 16, 12
+  offset: 0, 0
+  index: -1
+left-1.png(1)
+  rotate: false
+  xy: 275, 40
+  size: 24, 18
+  orig: 24, 18
+  offset: 0, 0
+  index: -1
+right-1.png
+  rotate: false
+  xy: 509, 965
+  size: 24, 18
+  orig: 24, 18
+  offset: 0, 0
+  index: -1

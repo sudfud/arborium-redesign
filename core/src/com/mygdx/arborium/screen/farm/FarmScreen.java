@@ -26,15 +26,18 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.arborium.game.Arborium;
 import com.mygdx.arborium.game.CurrencyManager;
 import com.mygdx.arborium.game.ExperienceManager;
 import com.mygdx.arborium.game.Plot;
+import com.mygdx.arborium.game.StatsManager;
 import com.mygdx.arborium.item.Tree;
 import com.mygdx.arborium.screen.GameScreen;
 
@@ -69,8 +72,8 @@ public class FarmScreen extends GameScreen {
     private Label currencyLabel;
     private HorizontalGroup plotInfoGroup;
     private FarmScreenTable farmScreenTable;
-    private Button leftButton;
-    private Button rightButton;
+    private ImageButton leftButton;
+    private ImageButton rightButton;
     private TextButton shopButton;
 
     private Label lockedLabel;
@@ -161,14 +164,15 @@ public class FarmScreen extends GameScreen {
 
         currencyGroup = new HorizontalGroup();
         coin = new Image(game.getAssetHandler().getTexureRegion("coin4x"));
-        currencyLabel = new Label("" + CurrencyManager.getAmount(), skin, "large");
+        currencyLabel = new Label("" + CurrencyManager.getAmount(), skin);
         currencyGroup.addActor(coin);
         currencyGroup.addActor(currencyLabel);
 
         farmScreenTable = new FarmScreenTable(this, plots.get(0), skin);
         farmScreenTable.setVisible(false);
 
-        leftButton = new Button(skin, "left");
+        leftButton = new ImageButton(skin, "left");
+        leftButton.setScale(2);
         leftButton.addListener(new ClickListener() {
            @Override
            public void clicked(InputEvent event, float x, float y) {
@@ -176,7 +180,8 @@ public class FarmScreen extends GameScreen {
            }
         });
 
-        rightButton = new Button(skin, "right");
+        rightButton = new ImageButton(skin, "right");
+        rightButton.setScale(3);
         rightButton.addListener(new ClickListener() {
            @Override
            public void clicked(InputEvent event, float x, float y) {
@@ -195,7 +200,7 @@ public class FarmScreen extends GameScreen {
 
         currentLevel = ExperienceManager.getLevel();
         currentLevelLabel = new Label("Lvl. " + currentLevel, skin);
-        levelUpLabel = new Label("Level Up!!!", skin, "large");
+        levelUpLabel = new Label("Level Up!!!", skin);
 
         expBar = new ProgressBar(1, 100, 1, false, skin);
         ProgressBar.ProgressBarStyle barStyle = expBar.getStyle();
@@ -376,8 +381,9 @@ public class FarmScreen extends GameScreen {
             }
 
             // If we reached the produce amount of this tree, stop harvesting
-            if (focusedPlot.getPlantedTree().getProduceAmount() +  focusedPlot.getProduceAmountExtra() == fruitCollect) {
+            if (focusedPlot.getPlantedTree().getProduceAmount() + focusedPlot.getProduceAmountExtra() == fruitCollect) {
                 harvesting = false;
+                StatsManager.save();
             }
         }
         spriteBatch.end();
@@ -552,7 +558,7 @@ public class FarmScreen extends GameScreen {
         UITable.add(farmScreenTable).colspan(3).expand().bottom();
         UITable.row();
         UITable.add(currentLevelLabel);
-        UITable.add(expBar).padTop(50).padBottom(15).width(Gdx.graphics.getWidth() * 3/4).height(25);
+        UITable.add(expBar).padTop(50).padBottom(15).width(Value.percentWidth(.5f, UITable)).height(25);
         UITable.row();
         UITable.add(leftButton);
         UITable.add(shopButton).size(150, 75);

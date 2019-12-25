@@ -20,7 +20,7 @@ import com.mygdx.arborium.item.Item;
 import com.mygdx.arborium.item.ItemManager;
 import com.mygdx.arborium.item.Tree;
 
-public class FarmScreenTable extends Table {
+public class FarmScreenTable extends Window {
     private FarmScreen farmScreen;
 
     private Plot plot;
@@ -47,14 +47,14 @@ public class FarmScreenTable extends Table {
     private float h = Gdx.graphics.getHeight();
 
     public FarmScreenTable(final FarmScreen farmScreen, final Plot plot, Skin skin) {
-        super();
+        super("", skin);
 
         this.farmScreen = farmScreen;
         this.plot = plot;
 
         infoWindow = new Container();
 
-        plotInfoArea = new Label(plot.toString(), skin, "small");
+        plotInfoArea = new Label(plot.toString(), skin);
 
         TextButton butt = new TextButton("", skin);
         TextButton butt2 = new TextButton("", skin, "disabled");
@@ -192,7 +192,7 @@ public class FarmScreenTable extends Table {
         this.clear();
         this.add(plotInfoArea);
         this.row();
-        this.add(buttonGroup).padBottom(200);
+        this.add(buttonGroup);
 
         buttonGroup.clear();
         if (plot.getState() == Plot.PlotState.EMPTY) {

@@ -2,6 +2,7 @@ package com.mygdx.arborium.item;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.arborium.game.Plot;
+import com.mygdx.arborium.game.StatsManager;
 import com.mygdx.arborium.screen.AssetHandler;
 
 import java.util.ArrayList;
@@ -87,15 +88,23 @@ public class ItemManager {
 
         upgrades = new ArrayList<>();
 
-        upgrades.add(new Upgrade(64, "Test Upgrade", (id) -> {
-            Tree tree = (Tree)findItemById(1);  // Apple Tree
-            int prodAmount = tree.getProduceAmount();
-            int prodValue = tree.getProduceValue();
-            int exp = tree.getExperience();
-            tree.setProduceAmount(prodAmount * 2);
-            tree.setProduceValue(prodValue * 2);
-            tree.setExperience(exp * 2);
-            }, () -> true, 0));
+        Tree appleTree = (Tree)findItemById(1);
+
+        upgrades.add(new Upgrade(64, "Test Upgrade",
+
+                (id) -> {
+            int prodAmount = appleTree.getProduceAmount();
+            int prodValue = appleTree.getProduceValue();
+            int exp = appleTree.getExperience();
+            appleTree.setProduceAmount(prodAmount * 2);
+            appleTree.setProduceValue(prodValue * 2);
+            appleTree.setExperience(exp * 2);
+            },
+
+                () -> {
+            int count = StatsManager.getFruitCollected(appleTree);
+            return (count >= 100);
+            }, 375));
     }
 
     public static Item findItemById(int id) {

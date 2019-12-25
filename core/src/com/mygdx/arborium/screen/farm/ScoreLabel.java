@@ -29,8 +29,8 @@ public class ScoreLabel extends Table {
 
         coinGroup = new HorizontalGroup();
         coinImage = new Image(game.getAssetHandler().getTexureRegion("coin4x"));
-        currencyLabel = new Label("+" + currency, skin, "large");
-        expLabel = new Label ("+" + exp + "XP", skin, "large");
+        currencyLabel = new Label("+" + currency, skin);
+        expLabel = new Label ("+" + exp + "XP", skin);
 
         coinGroup.addActor(currencyLabel);
         coinGroup.addActor(coinImage);

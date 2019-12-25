@@ -33,6 +33,7 @@ public class Arborium extends Game {
         assetHandler = new AssetHandler();
         assetHandler.load();
 		ItemManager.init(assetHandler);
+		StatsManager.initialize();
 		ExperienceManager.init();
 		CurrencyManager.init();
 		InventoryManager.init();

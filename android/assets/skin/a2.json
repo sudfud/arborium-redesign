@@ -1,0 +1,148 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	_serif: {
+		file: 712_serif.fnt
+	}
+	_serif_48: {
+		file: 712_serif.fnt
+	}
+	serif_16: {
+		file: serif_16.fnt
+	}
+	serif_outline: {
+		file: serif_outline.fnt
+	}
+	serif_outline_16: {
+		file: serif_outline_16.fnt
+	}
+}
+com.badlogic.gdx.graphics.Color: {
+	RGBA_0_0_0_255: {
+		r: 0
+		g: 0
+		b: 0
+		a: 1
+	}
+	RGBA_164_164_164_255: {
+		r: 0.42666668
+		g: 0.42666668
+		b: 0.42666668
+		a: 1
+	}
+	RGBA_255_255_255_255: {
+		r: 1
+		g: 1
+		b: 1
+		a: 1
+	}
+	RGBA_25_134_7_255: {
+		r: 0.14533514
+		g: 0.72333336
+		b: 0.045811117
+		a: 1
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
+	left_white: {
+		name: left
+		color: {
+			r: 1
+			g: 1
+			b: 1
+			a: 1
+		}
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+	default: {
+		up: left
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+	default: {
+		imageUp: right-1.png
+		up: greenbutton-1.png
+	}
+	left: {
+		imageUp: left-1.png(1)
+		up: greenbutton-1.png(1)
+		pressedOffsetY: 3
+		unpressedOffsetY: 4
+		checkedOffsetY: 4
+	}
+	right: {
+		imageUp: right-1.png
+		up: greenbutton-1.png(1)
+		pressedOffsetY: 3
+		unpressedOffsetY: 4
+		checkedOffsetY: 4
+	}
+	appleup: {
+		imageUp: apple2x
+		up: 2-1.png
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+	default: {
+		font: _serif_48
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
+	default: {
+		font: serif_16
+		fontColorSelected: RGBA_255_255_255_255
+		fontColorUnselected: RGBA_0_0_0_255
+		selection: brown_inlay
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
+	default-horizontal: {
+		background: expBar3.png
+		knob: expamt
+		knobBefore: expamt
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+	default: {
+		vScroll: scroll.png
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
+	default: {
+		font: serif_16
+		fontColor: RGBA_255_255_255_255
+		scrollStyle: default
+		listStyle: default
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: {
+		font: _serif
+		fontColor: RGBA_255_255_255_255
+		up: biggreenbutt
+	}
+	style2: {
+		font: serif_16
+		fontColor: RGBA_255_255_255_255
+		up: greenbutt
+		pressedOffsetY: -1
+	}
+	disabled: {
+		font: serif_16
+		fontColor: RGBA_164_164_164_255
+		up: greenbutt
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {
+	default: {
+		label: default
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
+	default: {
+		background: greenboard2
+		titleFont: serif_outline
+		titleFontColor: RGBA_25_134_7_255
+	}
+}
+}

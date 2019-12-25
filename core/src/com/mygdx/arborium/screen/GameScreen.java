@@ -9,7 +9,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.arborium.game.Arborium;
 
 // Base game class
@@ -28,14 +32,13 @@ public abstract class GameScreen implements Screen {
     public GameScreen(Arborium game) {
         this.game = game;
 
-        stage = new Stage(new ExtendViewport(800, 480));
-        UITable = new Table();
-        UITable.setFillParent(true);
-        stage.addActor(UITable);
-
         spriteBatch = new SpriteBatch();
         spriteBatch.enableBlending();
         camera = new OrthographicCamera();
+        stage = new Stage();
+        UITable = new Table();
+        UITable.setFillParent(true);
+        stage.addActor(UITable);
     }
 
     @Override

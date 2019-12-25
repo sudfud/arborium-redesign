@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.arborium.game.Arborium;
@@ -54,7 +55,7 @@ public class ShopEntryWindow extends Window {
 
         descriptionLabel = new Label("", skin);
         descriptionLabel.setWrap(true);
-        descriptionLabel.setWidth(10f);
+        //descriptionLabel.setWidth();
         int catCount = Category.values().length;
 
         treeStatIcons = new Image[catCount];
@@ -118,7 +119,7 @@ public class ShopEntryWindow extends Window {
         this.clear();
         this.add(itemImage).colspan(2).expandX();
         this.row();
-        this.add(descriptionLabel).colspan(2).pad(15).width(500);
+        this.add(descriptionLabel).colspan(2).pad(15).width(Value.percentWidth(0.75f, this));
         this.row();
         this.add(priceGroup).colspan(2).pad(15);
     }

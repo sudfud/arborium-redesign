@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class AssetHandler {
     public static final String ATLAS_PATH = "arborium.atlas";
     public static final String EXP_BAR_PATH = "skin/arborium-exp.atlas";
-    public static final String SKIN_PATH = "skin/arborium_ui.json";
+    public static final String SKIN_PATH = "skin/a2.json";
     public static final String FONT_PATH = "skin/8bt.fnt";
 
     private static HashMap<Tree, TextureRegion> treeSprites;

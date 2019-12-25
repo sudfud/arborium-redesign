@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.mygdx.arborium.game.CurrencyManager;
 import com.mygdx.arborium.game.ExperienceManager;
 import com.mygdx.arborium.game.Plot;
+import com.mygdx.arborium.game.StatsManager;
 import com.mygdx.arborium.item.Tree;
 
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class FarmScreenInputProcessor implements GestureListener {
                 if (fixture.testPoint(worldCoords.x, worldCoords.y)) {
                     farmScreen.bodyDestroyList.add(body);
                     farmScreen.fruitCollect++;
+                    StatsManager.incFruitCollected(farmScreen.getFocusedPlot().getPlantedTree());
                     screenCoords = farmScreen.getCamera().project(worldCoords);
                     farmScreen.createScoreLabel(screenCoords.x, screenCoords.y);
 
