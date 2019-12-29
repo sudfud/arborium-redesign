@@ -23,7 +23,6 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -163,7 +162,7 @@ public class FarmScreen extends GameScreen {
         skin = game.getAssetHandler().getSkin();
 
         currencyGroup = new HorizontalGroup();
-        coin = new Image(game.getAssetHandler().getTexureRegion("coin4x"));
+        coin = new Image(game.getAssetHandler().getTextureRegion("coin4x"));
         currencyLabel = new Label("" + CurrencyManager.getAmount(), skin);
         currencyGroup.addActor(coin);
         currencyGroup.addActor(currencyLabel);
@@ -214,7 +213,7 @@ public class FarmScreen extends GameScreen {
         lockedLabel = new Label("[LOCKED]", skin);
 
         priceGroup = new HorizontalGroup();
-        coin2 = new Image(game.getAssetHandler().getTexureRegion("coin4x"));
+        coin2 = new Image(game.getAssetHandler().getTextureRegion("coin4x"));
         priceLabel = new Label("", skin);
 
         unlockButton = new TextButton("Unlock", skin);
@@ -240,8 +239,8 @@ public class FarmScreen extends GameScreen {
         gestureDetector = new GestureDetector(new FarmScreenInputProcessor(this));
 
         // Sprite initialization
-        sprout = game.getAssetHandler().getTexureRegion("plant8x");
-        matureTree = game.getAssetHandler().getTexureRegion("tree8x");
+        sprout = game.getAssetHandler().getTextureRegion("plant8x");
+        matureTree = game.getAssetHandler().getTextureRegion("tree8x");
 
         cameraLerp = Interpolation.sine;
         target = camera.position;

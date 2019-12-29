@@ -35,7 +35,7 @@ public abstract class GameScreen implements Screen {
         spriteBatch = new SpriteBatch();
         spriteBatch.enableBlending();
         camera = new OrthographicCamera();
-        stage = new Stage();
+        stage = new Stage(new ScreenViewport());
         UITable = new Table();
         UITable.setFillParent(true);
         stage.addActor(UITable);

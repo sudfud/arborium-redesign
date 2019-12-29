@@ -5,8 +5,6 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -14,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.mygdx.arborium.game.Arborium;
-
-import java.util.ArrayList;
 
 public class ScoreLabel extends Table {
 
@@ -28,7 +24,7 @@ public class ScoreLabel extends Table {
         super();
 
         coinGroup = new HorizontalGroup();
-        coinImage = new Image(game.getAssetHandler().getTexureRegion("coin4x"));
+        coinImage = new Image(game.getAssetHandler().getTextureRegion("coin4x"));
         currencyLabel = new Label("+" + currency, skin);
         expLabel = new Label ("+" + exp + "XP", skin);
 

@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.arborium.game.Arborium;
-import com.mygdx.arborium.game.ExperienceManager;
 import com.mygdx.arborium.game.ShopEntry;
 import com.mygdx.arborium.game.ShopManager;
 import com.mygdx.arborium.item.Item;
@@ -45,7 +44,7 @@ public class ShopEntryWindow extends Window {
         this.game = game;
 
         priceGroup = new HorizontalGroup();
-        coinImage = new Image(new TextureRegionDrawable(game.getAssetHandler().getTexureRegion("coin4x")));
+        coinImage = new Image(new TextureRegionDrawable(game.getAssetHandler().getTextureRegion("coin4x")));
         priceLabel = new Label("", skin);
         priceGroup.addActor(coinImage);
         priceGroup.addActor(priceLabel);
@@ -65,7 +64,7 @@ public class ShopEntryWindow extends Window {
 
         this.row();
         for (int i = 0; i < catCount; i++) {
-            treeStatIcons[i] = new Image(new TextureRegionDrawable(game.getAssetHandler().getTexureRegion(statIconNames[i])));
+            treeStatIcons[i] = new Image(new TextureRegionDrawable(game.getAssetHandler().getTextureRegion(statIconNames[i])));
             this.add(treeStatIcons[i]).pad(5).expandX();
 
             treeStatLabels[i] = new Label("", skin);
@@ -106,7 +105,7 @@ public class ShopEntryWindow extends Window {
 
         else {
             getTitleLabel().setText("[LOCKED]");
-            itemDrawable.setRegion(game.getAssetHandler().getTexureRegion("locked8x"));
+            itemDrawable.setRegion(game.getAssetHandler().getTextureRegion("locked8x"));
             itemImage.setDrawable(itemDrawable);
 
             descriptionLabel.setText("Unlocked at level " + ShopManager.getUnlockLevel(item));

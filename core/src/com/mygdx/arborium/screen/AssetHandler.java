@@ -42,7 +42,7 @@ public class AssetHandler {
         assetManager.finishLoading();
     }
 
-    public TextureRegion getTexureRegion(String name) {
+    public TextureRegion getTextureRegion(String name) {
         return assetManager.get(ATLAS_PATH, TextureAtlas.class).findRegion(name);
     }
 

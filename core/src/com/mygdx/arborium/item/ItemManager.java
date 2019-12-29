@@ -1,13 +1,11 @@
 package com.mygdx.arborium.item;
 
-import com.badlogic.gdx.Gdx;
 import com.mygdx.arborium.game.Plot;
 import com.mygdx.arborium.game.StatsManager;
 import com.mygdx.arborium.screen.AssetHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.function.Consumer;
 
 public class ItemManager {
     private static ArrayList<Tree> trees;
@@ -20,45 +18,45 @@ public class ItemManager {
         itemMap = new HashMap<>();
         trees.add(new Tree(1, "Apple Tree",
                 "The hallmark of any orchard.",
-                1 * 60 * 1000, 30 * 1000, 4, 1, 25,
-                assetHandler.getTexureRegion("apple_tree2x"),
-                assetHandler.getTexureRegion("apple2x")));
+                1 * 60 * 1000, 30 * 1000, 4, 1, 5,
+                assetHandler.getTextureRegion("apple_tree2x"),
+                assetHandler.getTextureRegion("apple2x")));
 
         trees.add(new Tree(2, "Orange Tree",
                 "Deliciously citrus.",
-                5 * 60 * 1000, 2 * 60 * 1000, 2, 15, 200,
-                assetHandler.getTexureRegion("orange_tree2x"),
-                assetHandler.getTexureRegion("orange2x")));
+                5 * 60 * 1000, 2 * 60 * 1000, 2, 15, 40,
+                assetHandler.getTextureRegion("orange_tree2x"),
+                assetHandler.getTextureRegion("orange2x")));
 
         trees.add(new Tree(3, "Cherry Tree",
                 "Small, but numerous. Great on sundaes.",
-                20 * 60 * 1000, 15 * 60 * 1000, 8, 35, 325,
-                assetHandler.getTexureRegion("cherry_tree2x"),
-                assetHandler.getTexureRegion("cherry2x")));
+                35 * 60 * 1000, 15 * 60 * 1000, 8, 75, 80,
+                assetHandler.getTextureRegion("cherry_tree2x"),
+                assetHandler.getTextureRegion("cherry2x")));
 
         trees.add(new Tree(4, "Peach Tree",
                 "Maaade in Georgiaaaaaaa",
-                15 * 60 * 1000, 75 * 60 * 1000, 3, 900, 5000,
-                assetHandler.getTexureRegion("peach_tree8x"),
-                assetHandler.getTexureRegion("peach8x")));
+                75 * 60 * 1000, 45 * 60 * 1000, 3, 800, 675,
+                assetHandler.getTextureRegion("peach_tree8x"),
+                assetHandler.getTextureRegion("peach8x")));
 
         trees.add(new Tree(5, "Lemon Tree",
                 "Harsh to eat, but makes the best lemonade",
-                150 * 60 * 1000,  20 * 60 * 1000, 10, 100, 500,
-                assetHandler.getTexureRegion("lemon_tree8x"),
-                assetHandler.getTexureRegion("lemon8x")));
+                150 * 60 * 1000,  100 * 60 * 1000, 10, 350, 450,
+                assetHandler.getTextureRegion("lemon_tree8x"),
+                assetHandler.getTextureRegion("lemon8x")));
 
         trees.add(new Tree(6, "Sour Green Apple Tree",
                 "An upgrade from the original sweet apple, some would say",
-                4 * 60 * 60 * 1000, 150 * 60 * 1000, 6, 7500, 100,
-                assetHandler.getTexureRegion("green_apple_tree8x"),
-                assetHandler.getTexureRegion("green_apple8x")));
+                4 * 60 * 60 * 1000, 240 * 60 * 1000, 6, 1500, 1250,
+                assetHandler.getTextureRegion("green_apple_tree8x"),
+                assetHandler.getTextureRegion("green_apple8x")));
 
         trees.add(new Tree(7, "Lychee Tree",
                 "Originally from China. The insides are sweet, and they like to grow in bunches.",
-                145 * 60 * 1000, 45 * 60 * 1000, 12, 100, 150,
-                assetHandler.getTexureRegion("lychee_tree8x"),
-                assetHandler.getTexureRegion("lychee8x")));
+                12 * 60 * 60 * 1000, 6 * 60 * 60 * 1000, 12, 2000, 700,
+                assetHandler.getTextureRegion("lychee_tree8x"),
+                assetHandler.getTextureRegion("lychee8x")));
 
         for (Tree tree : trees) {
             itemMap.put(tree.getId(), tree);
@@ -68,18 +66,33 @@ public class ItemManager {
 
         fertilizers.add(new Fertilizer(32, "Fruit by the Mile",
                 "Contains a small amount of mutagens genetically designed to increase yield. +1 to harvest amount.",
-                assetHandler.getTexureRegion("fertilizer8x"),
+                assetHandler.getTextureRegion("fertilizer8x"),
                 (Plot plot) -> plot.setProduceAmountExtra(1)));
 
         fertilizers.add(new Fertilizer(33, "Speedy Seeds",
                 "Filled with electrolytes to make plants grow faster. Reduces grow time by 20%",
-                assetHandler.getTexureRegion("fertilizer8x"),
+                assetHandler.getTextureRegion("fertilizer8x"),
                 (plot) -> plot.setMatureTimeMultiplier(0.80f)));
 
         fertilizers.add(new Fertilizer(34, "Fruitful Endeavours",
                 "Strengthens the roots, providing more nutrients to the fruit. Reduces produce time by 20%",
-                assetHandler.getTexureRegion("fertilizer8x"),
+                assetHandler.getTextureRegion("fertilizer8x"),
                 (Plot plot) -> plot.setProduceTimeMultiplier(0.80f)));
+
+        fertilizers.add(new Fertilizer(35, "Fruit Frenzy",
+                "+5 fruit per harvest",
+                assetHandler.getTextureRegion("fertilizer8x"),
+                (plot) -> plot.setProduceAmountExtra(5)));
+
+        fertilizers.add(new Fertilizer(36, "Mach 3",
+                "-40% grow time",
+                assetHandler.getTextureRegion("fertilizer8x"),
+                (plot) -> plot.setMatureTimeMultiplier(0.60f)));
+
+        fertilizers.add(new Fertilizer(37, "Big & Bountiful",
+                "-40% produce time",
+                assetHandler.getTextureRegion("fertilizer8x"),
+                (plot) -> plot.setProduceTimeMultiplier(0.60f)));
 
 
         for (Fertilizer fert : fertilizers) {

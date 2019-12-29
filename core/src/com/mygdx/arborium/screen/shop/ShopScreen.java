@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Queue;
@@ -19,7 +18,6 @@ import com.mygdx.arborium.game.ShopManager;
 import com.mygdx.arborium.item.InventoryManager;
 import com.mygdx.arborium.item.Item;
 import com.mygdx.arborium.item.ItemManager;
-import com.mygdx.arborium.item.Tree;
 import com.mygdx.arborium.screen.GameScreen;
 
 public class ShopScreen extends GameScreen {
@@ -106,7 +104,7 @@ public class ShopScreen extends GameScreen {
 
         updateCategory();
 
-        coinImage = new Image(new TextureRegionDrawable(game.getAssetHandler().getTexureRegion("coin4x")));
+        coinImage = new Image(new TextureRegionDrawable(game.getAssetHandler().getTextureRegion("coin4x")));
         currencyLabel = new Label("" + CurrencyManager.getAmount(), skin);
         currencyGroup = new HorizontalGroup();
 

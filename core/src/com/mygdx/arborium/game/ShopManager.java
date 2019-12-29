@@ -21,25 +21,29 @@ public class ShopManager {
                 new ShopEntry(ItemManager.findItemById(3), 1200, 15),
 
                 // Peach tree
-                new ShopEntry(ItemManager.findItemById(4), 7500, 25),
+                new ShopEntry(ItemManager.findItemById(4), 7500, 30),
 
                 // Lemon tree
-                new ShopEntry(ItemManager.findItemById(5), 30000, 35),
+                new ShopEntry(ItemManager.findItemById(5), 30000, 50),
 
                 // Green Apple tree
-                new ShopEntry(ItemManager.findItemById(6), 350000, 45),
+                new ShopEntry(ItemManager.findItemById(6), 350000, 75),
 
                 // Lychee tree
-                new ShopEntry(ItemManager.findItemById(7), 150000, 55),
+                new ShopEntry(ItemManager.findItemById(7), 1000000, 110),
 
                 // Produce amount fertilizer
-                new ShopEntry(ItemManager.findItemById(32),150, 10),
+                new ShopEntry(ItemManager.findItemById(32),300, 10),
 
                 // Grow rate fertilizer
-                new ShopEntry(ItemManager.findItemById(33), 750, 20),
+                new ShopEntry(ItemManager.findItemById(33), 1500, 20),
 
                 // Produce rate fertilizer
-                new ShopEntry(ItemManager.findItemById(34), 2000, 30)
+                new ShopEntry(ItemManager.findItemById(34), 4000, 30),
+
+                new ShopEntry(ItemManager.findItemById(35), 15000, 40),
+
+                new ShopEntry(ItemManager.findItemById(36), 75000, 50)
                 };
 
         shopItems = trees;
