@@ -68,4 +68,6 @@ public class ExperienceManager {
         preferences.putInteger(THRESHOLD_KEY, nextLevelThreshold);
         preferences.flush();
     }
+
+    private static
 }
