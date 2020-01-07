@@ -1794,7 +1794,7 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.g2d.BitmapFont
 						name: font
 						optional: false
-						value: serif_16
+						value: _serif_48
 					}
 					fontColorSelected: {
 						class: com.ray3k.skincomposer.data.StyleProperty
@@ -2619,7 +2619,7 @@ jsonData: {
 						type: com.badlogic.gdx.graphics.g2d.BitmapFont
 						name: font
 						optional: false
-						value: serif_16
+						value: _serif_48
 					}
 					fontColor: {
 						class: com.ray3k.skincomposer.data.StyleProperty
@@ -2668,7 +2668,7 @@ jsonData: {
 						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
 						name: up
 						optional: true
-						value: greenbutt
+						value: biggreenbutt
 					}
 					down: {
 						class: com.ray3k.skincomposer.data.StyleProperty
@@ -2717,7 +2717,7 @@ jsonData: {
 						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
 						name: disabled
 						optional: true
-						value: null
+						value: greenbutton-1.png(1)
 					}
 					pressedOffsetX: {
 						class: com.ray3k.skincomposer.data.StyleProperty

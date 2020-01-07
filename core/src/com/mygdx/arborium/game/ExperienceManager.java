@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class ExperienceManager {
 
+    private static final int LVL_EXP = 100;
+
     private static final String EXP_KEY = "Experience";
     private static final String LVL_KEY = "Level";
     private static final String THRESHOLD_KEY = "Threshold";
@@ -13,7 +15,7 @@ public class ExperienceManager {
     private static Preferences preferences;
 
     private static int experience = 0;
-    private static int nextLevelThreshold = 50;
+    private static int nextLevelThreshold = LVL_EXP;
     private static int level = 1;
 
     public static void init() {
@@ -25,7 +27,7 @@ public class ExperienceManager {
         experience += exp;
         if (experience >= nextLevelThreshold) {
             level++;
-            nextLevelThreshold = (int) (50 * Math.pow((double) level, 1.75d));
+            nextLevelThreshold = (int) (LVL_EXP * Math.pow((double) level, 1.80d));
 
             Gdx.app.log("ExpMang", "Level up!!! Lvl: " + level + ", Exp. to next level: " + (nextLevelThreshold - experience));
         }
@@ -49,7 +51,7 @@ public class ExperienceManager {
             return 0;
         }
         else
-            return (int) (50 * Math.pow((double) level - 1, 1.75d));
+            return (int) (LVL_EXP * Math.pow((double) level - 1, 1.80d));
     }
 
     public static int getExpToNextLevel() {
@@ -59,7 +61,7 @@ public class ExperienceManager {
     public static void load() {
         experience = preferences.getInteger(EXP_KEY, 0);
         level = preferences.getInteger(LVL_KEY, 1);
-        nextLevelThreshold = preferences.getInteger(THRESHOLD_KEY,  100);
+        nextLevelThreshold = preferences.getInteger(THRESHOLD_KEY,  LVL_EXP);
     }
 
     public static void save() {
@@ -68,6 +70,4 @@ public class ExperienceManager {
         preferences.putInteger(THRESHOLD_KEY, nextLevelThreshold);
         preferences.flush();
     }
-
-    private static
 }

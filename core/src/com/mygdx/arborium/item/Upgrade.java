@@ -17,8 +17,8 @@ public class Upgrade extends Item{
 
     private int price;
 
-    public Upgrade(int id, String name, IntConsumer effectFunction, Supplier<Boolean> unlockCondition, int price) {
-        super(id, name, "", null);
+    public Upgrade(int id, String name, String description, IntConsumer effectFunction, Supplier<Boolean> unlockCondition, int price) {
+        super(id, name, description, null);
         preferences = Gdx.app.getPreferences("Upgrades");
         this.enabled = false;
         this.effectFunction = effectFunction;

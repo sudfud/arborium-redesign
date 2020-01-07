@@ -14,7 +14,7 @@ import java.util.Stack;
 
 public class Arborium extends Game {
 
-	private final String SMALL_MAP = "map/arborSmallMap.tmx";
+	private final String SMALL_MAP = "map/FUCKMAP.tmx";
 	private final String MED_MAP = "map/arborMedMap.tmx";
 	private final String LARGE_MAP = "map/arborLargeMap.tmx";
 	private final String HUGE_MAP = "map/arborHugeMap.tmx";
@@ -42,7 +42,7 @@ public class Arborium extends Game {
 		screenStack = new Stack<>();
 
 		farmScreens = new ArrayList<>();
-		farmScreens.add(new FarmScreen(1,this, SMALL_MAP));
+		farmScreens.add(new FarmScreen(1,this, "map/arborSmallMap.tmx"));
 		farmScreens.add(new FarmScreen(1, this, MED_MAP, 500));
 		farmScreens.add(new FarmScreen(2, this, LARGE_MAP, 5000));
 		farmScreens.add(new FarmScreen(3, this, HUGE_MAP, 50000));

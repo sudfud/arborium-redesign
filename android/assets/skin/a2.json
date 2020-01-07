@@ -89,7 +89,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: {
-		font: serif_16
+		font: _serif_48
 		fontColorSelected: RGBA_255_255_255_255
 		fontColorUnselected: RGBA_0_0_0_255
 		selection: brown_inlay
@@ -128,9 +128,10 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		pressedOffsetY: -1
 	}
 	disabled: {
-		font: serif_16
+		font: _serif_48
 		fontColor: RGBA_164_164_164_255
-		up: greenbutt
+		up: biggreenbutt
+		disabled: greenbutton-1.png(1)
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {

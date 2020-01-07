@@ -143,7 +143,8 @@ public class FarmScreen extends GameScreen {
         }
 
         // Map initialization
-        tileMap = new TmxMapLoader().load(mapDir);
+
+       tileMap = new TmxMapLoader().load(mapDir);
         int plotCount = (int)tileMap.getProperties().get("plotCount");
         mapRenderer = new OrthogonalTiledMapRenderer(tileMap, 1 / 64f, spriteBatch);
 
@@ -240,7 +241,7 @@ public class FarmScreen extends GameScreen {
 
         // Sprite initialization
         sprout = game.getAssetHandler().getTextureRegion("plant8x");
-        matureTree = game.getAssetHandler().getTextureRegion("tree8x");
+        matureTree = game.getAssetHandler().getTextureRegion("tree");
 
         cameraLerp = Interpolation.sine;
         target = camera.position;
@@ -324,7 +325,7 @@ public class FarmScreen extends GameScreen {
             Rectangle bounds = plot.getBounds();
 
             float x = bounds.x / 64;
-            float y = bounds.y / 64 + 1/4f;
+            float y = bounds.y / 64 + 1/2f;
 
             switch(plot.getState()) {
                 case GROWING:
@@ -346,14 +347,14 @@ public class FarmScreen extends GameScreen {
                 Rectangle bounds = focusedPlot.getBounds();
 
                 float x = bounds.x / 64;
-                float y = bounds.y / 64 + 1/4f;
+                float y = bounds.y / 64 + 1/2f;
 
                 spriteBatch.draw(focusedPlot.getPlantedTree().getTexture(), x, y, 1, 1);
 
                 elapsedTime += delta;
 
                 // If enough time has passed, produce another fruit and reset the elapsed time
-                if (elapsedTime >= 1 / (float)focusedPlot.getPlantedTree().getProduceAmount() * 2) {
+                if (elapsedTime >= 1 / (float)focusedPlot.getPlantedTree().getProduceAmount() * 3/2 ) {
                     makeFruit();
                     elapsedTime = 0f;
                 }
