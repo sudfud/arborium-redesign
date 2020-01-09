@@ -97,7 +97,7 @@ public class FarmScreenInputProcessor implements GestureListener {
     public boolean pan(float x, float y, float deltaX, float deltaY) {
         if (farmScreen.getFocusedPlot() == null) {
             float zoom = farmScreen.getCamera().zoom;
-            farmScreen.getCamera().translate(-deltaX / 256f * zoom, deltaY / 256f * zoom);
+            farmScreen.getCamera().translate(-deltaX / 1024f * zoom, deltaY / 1024f * zoom);
             farmScreen.getCamera().update();
         }
         return false;

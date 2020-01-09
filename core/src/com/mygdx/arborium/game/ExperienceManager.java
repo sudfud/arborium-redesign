@@ -27,7 +27,7 @@ public class ExperienceManager {
         experience += exp;
         if (experience >= nextLevelThreshold) {
             level++;
-            nextLevelThreshold = (int) (LVL_EXP * Math.pow((double) level, 1.80d));
+            nextLevelThreshold = (int) (LVL_EXP * Math.pow((double) level, 1.5d));
 
             Gdx.app.log("ExpMang", "Level up!!! Lvl: " + level + ", Exp. to next level: " + (nextLevelThreshold - experience));
         }
@@ -51,7 +51,7 @@ public class ExperienceManager {
             return 0;
         }
         else
-            return (int) (LVL_EXP * Math.pow((double) level - 1, 1.80d));
+            return (int) (LVL_EXP * Math.pow((double) level - 1, 1.5d));
     }
 
     public static int getExpToNextLevel() {

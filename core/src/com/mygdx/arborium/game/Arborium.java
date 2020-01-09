@@ -42,10 +42,10 @@ public class Arborium extends Game {
 		screenStack = new Stack<>();
 
 		farmScreens = new ArrayList<>();
-		farmScreens.add(new FarmScreen(1,this, "map/arborSmallMap.tmx"));
-		farmScreens.add(new FarmScreen(1, this, MED_MAP, 500));
-		farmScreens.add(new FarmScreen(2, this, LARGE_MAP, 5000));
-		farmScreens.add(new FarmScreen(3, this, HUGE_MAP, 50000));
+		farmScreens.add(new FarmScreen(1,this, 4, "map/arborSmallMap.tmx"));
+		farmScreens.add(new FarmScreen(1, this, 8,  MED_MAP, 500));
+		farmScreens.add(new FarmScreen(2, this, 16, LARGE_MAP, 5000));
+		farmScreens.add(new FarmScreen(3, this, 32, HUGE_MAP, 50000));
 
 		shopScreen = new ShopScreen(this);
 		pushScreen(farmScreens.get(farmScreenIndex));

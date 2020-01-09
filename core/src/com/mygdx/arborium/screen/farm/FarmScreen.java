@@ -122,7 +122,7 @@ public class FarmScreen extends GameScreen {
 
     // TEST
 
-    public FarmScreen(int id, Arborium arborium, String mapDir)
+    public FarmScreen(int id, Arborium arborium, int plotCount, String mapDir)
     {
         super(arborium);
 
@@ -132,20 +132,12 @@ public class FarmScreen extends GameScreen {
 
         preferences = Gdx.app.getPreferences("Farm " + id);
 
-        if (!preferences.contains("locked")) {
-            locked = false;
-            farmCost = 0;
-        }
-
-        else {
-            locked = preferences.getBoolean("locked");
-            farmCost = preferences.getInteger("cost");
-        }
+        locked = false;
+        farmCost = 0;
 
         // Map initialization
 
        tileMap = new TmxMapLoader().load(mapDir);
-        int plotCount = (int)tileMap.getProperties().get("plotCount");
         mapRenderer = new OrthogonalTiledMapRenderer(tileMap, 1 / 64f, spriteBatch);
 
         if (plots == null) {
@@ -241,7 +233,7 @@ public class FarmScreen extends GameScreen {
 
         // Sprite initialization
         sprout = game.getAssetHandler().getTextureRegion("plant8x");
-        matureTree = game.getAssetHandler().getTextureRegion("tree");
+        matureTree = game.getAssetHandler().getTextureRegion("tree_blue");
 
         cameraLerp = Interpolation.sine;
         target = camera.position;
@@ -259,13 +251,12 @@ public class FarmScreen extends GameScreen {
         showUI();
     }
 
-    public FarmScreen(int id, Arborium arborium, String mapDir, int farmCost) {
-        this(id, arborium, mapDir);
-        if (!preferences.contains("locked")) {
-            locked = true;
-            save();
-        }
+    public FarmScreen(int id, Arborium arborium, int plotCount, String mapDir, int farmCost) {
+        this(id, arborium, plotCount, mapDir);
+
+        locked = preferences.getBoolean("locked", true);
         this.farmCost = farmCost;
+        save();
     }
 
     @Override
@@ -393,7 +384,7 @@ public class FarmScreen extends GameScreen {
             camera.position.lerp(target, lerpElapsed);
 
             camera.zoom = MathUtils.lerp(camera.zoom, toZoom, lerpElapsed);
-            lerpElapsed += delta;
+            lerpElapsed += delta / 2f;
         }
         else if (lerpElapsed > 1f && toZoom == 7.5f && focusedPlot != null) {
             focusedPlot = null;

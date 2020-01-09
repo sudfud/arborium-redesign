@@ -19,7 +19,7 @@ public class ItemManager {
         trees.add(new Tree(1, "Apple Tree",
                 "The hallmark of any orchard.",
                 1 * 60 * 1000, 30 * 1000, 4, 1, 5,
-                assetHandler.getTextureRegion("apple_tree"),
+                assetHandler.getTextureRegion("apple_tree_blue"),
                 assetHandler.getTextureRegion("apple2x")));
 
         trees.add(new Tree(2, "Orange Tree",

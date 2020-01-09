@@ -1,33 +1,40 @@
 
 arborium.png
-size: 1024,512
+size: 2048,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 apple2x
-  rotate: false
-  xy: 262, 216
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-apple_tree
   rotate: false
   xy: 392, 346
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
+apple_tree
+  rotate: false
+  xy: 262, 86
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
 apple_tree2x
   rotate: false
-  xy: 392, 216
+  xy: 522, 346
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+apple_tree_blue
+  rotate: false
+  xy: 912, 346
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 cherry2x
   rotate: false
-  xy: 132, 86
+  xy: 262, 216
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -41,7 +48,7 @@ cherry_tree2x
   index: -1
 coin4x
   rotate: false
-  xy: 912, 410
+  xy: 132, 20
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
@@ -62,77 +69,77 @@ green_apple8x
   index: -1
 green_apple_tree8x
   rotate: false
-  xy: 262, 86
+  xy: 392, 216
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 grow_time_icon8x
   rotate: false
-  xy: 132, 44
+  xy: 2, 2
   size: 128, 40
   orig: 128, 40
   offset: 0, 0
   index: -1
 lemon8x
   rotate: false
-  xy: 782, 346
+  xy: 652, 86
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 lemon_tree8x
   rotate: false
-  xy: 522, 346
+  xy: 392, 86
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 locked8x
   rotate: false
-  xy: 652, 86
+  xy: 782, 216
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 lychee8x
   rotate: false
-  xy: 782, 216
+  xy: 782, 86
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 lychee_tree8x
   rotate: false
-  xy: 392, 86
+  xy: 522, 216
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 orange2x
   rotate: false
-  xy: 522, 86
+  xy: 652, 216
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 orange_tree2x
   rotate: false
-  xy: 132, 216
+  xy: 262, 346
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 peach8x
   rotate: false
-  xy: 652, 216
+  xy: 782, 346
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 peach_tree8x
   rotate: false
-  xy: 522, 216
+  xy: 652, 346
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -146,14 +153,14 @@ plant8x
   index: -1
 produce_count_icon8x
   rotate: false
-  xy: 2, 2
+  xy: 1042, 434
   size: 128, 40
   orig: 128, 40
   offset: 0, 0
   index: -1
 produce_time_icon8x
   rotate: false
-  xy: 782, 174
+  xy: 912, 304
   size: 128, 40
   orig: 128, 40
   offset: 0, 0
@@ -167,14 +174,21 @@ produce_value_icon
   index: -1
 tree
   rotate: false
-  xy: 652, 346
+  xy: 522, 86
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 tree8x
   rotate: false
-  xy: 262, 346
+  xy: 132, 86
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+tree_blue
+  rotate: false
+  xy: 132, 216
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
