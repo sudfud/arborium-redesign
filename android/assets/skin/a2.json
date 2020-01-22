@@ -79,7 +79,15 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 	}
 	appleup: {
 		imageUp: apple2x
-		up: 2-1.png
+		up: biggreenbutt
+		down: greenbuttpressed
+		checked: greenbuttpressed
+	}
+	upgradebutton: {
+		up: biggreenbutt
+		down: greenbuttpressed
+		checked: greenbuttpressed
+		disabled: greenbuttpressed
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
@@ -120,6 +128,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		font: _serif
 		fontColor: RGBA_255_255_255_255
 		up: biggreenbutt
+		down: greenbuttpressed
 	}
 	style2: {
 		font: serif_16
@@ -132,6 +141,13 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		fontColor: RGBA_164_164_164_255
 		up: biggreenbutt
 		disabled: greenbutton-1.png(1)
+	}
+	toggle: {
+		font: _serif
+		fontColor: RGBA_255_255_255_255
+		up: biggreenbutt
+		down: greenbuttpressed
+		checked: greenbuttpressed
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {

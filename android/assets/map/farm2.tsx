@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.2" tiledversion="1.2.4" name="farm" tilewidth="64" tileheight="80" tilecount="10" columns="0">
+<tileset version="1.2" tiledversion="1.2.4" name="farm" tilewidth="64" tileheight="80" tilecount="12" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <terraintypes>
   <terrain name="grass" tile="-1"/>
@@ -33,5 +33,11 @@
  </tile>
  <tile id="14" terrain="0,0,0,0">
   <image width="64" height="64" source="solidgrass3(1).png"/>
+ </tile>
+ <tile id="15">
+  <image width="64" height="64" source="plot.png"/>
+ </tile>
+ <tile id="16" terrain="0,0,0,0">
+  <image width="64" height="64" source="plaingrass.png"/>
  </tile>
 </tileset>

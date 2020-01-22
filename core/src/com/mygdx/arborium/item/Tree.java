@@ -11,16 +11,19 @@ public class Tree extends Item {
     private int produceValue;   // Value of the fruit this tree produces
     private int experience;     // Experience gained per harvest
 
-    private TextureRegion treeTexture;
+    private TextureRegion matureTreeTexture;
+    private TextureRegion harvestTreeTexture;
     private TextureRegion fruitTexture;
 
     private Preferences preferences;
 
     public Tree(int id, String name, String description, long growTime, long prodTime,
-                int prodAmt, int prodValue, int exp, TextureRegion treeTexture,
+                int prodAmt, int prodValue, int exp,
+                TextureRegion matureTreeTexture,
+                TextureRegion harvestTreeTexture,
                 TextureRegion fruitTexture) {
 
-        super(id, name, description, treeTexture);
+        super(id, name, description, harvestTreeTexture);
 
         this.growTime = growTime;
         this.produceTime = prodTime;
@@ -28,7 +31,8 @@ public class Tree extends Item {
         this.produceValue = prodValue;
         this.experience = exp;
 
-        this.treeTexture = treeTexture;
+        this.matureTreeTexture = matureTreeTexture;
+        this.harvestTreeTexture = harvestTreeTexture;
         this.fruitTexture = fruitTexture;
     }
     // Getters and setters
@@ -79,6 +83,14 @@ public class Tree extends Item {
 
     public TextureRegion getFruitTexture() {
         return fruitTexture;
+    }
+
+    public TextureRegion getMatureTreeTexture() {
+        return matureTreeTexture;
+    }
+
+    public TextureRegion getHarvestTreeTexture() {
+        return harvestTreeTexture;
     }
 
     @Override

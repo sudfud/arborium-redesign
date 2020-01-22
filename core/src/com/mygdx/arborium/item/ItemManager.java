@@ -19,43 +19,50 @@ public class ItemManager {
         trees.add(new Tree(1, "Apple Tree",
                 "The hallmark of any orchard.",
                 1 * 60 * 1000, 30 * 1000, 4, 1, 5,
-                assetHandler.getTextureRegion("apple_tree_blue"),
+                assetHandler.getTextureRegion("apple_tree"),
+                assetHandler.getTextureRegion("apple_tree_harvest"),
                 assetHandler.getTextureRegion("apple2x")));
 
         trees.add(new Tree(2, "Orange Tree",
                 "Deliciously citrus.",
                 5 * 60 * 1000, 2 * 60 * 1000, 2, 15, 15,
-                assetHandler.getTextureRegion("orange_tree2x"),
+                assetHandler.getTextureRegion("orange_tree"),
+                assetHandler.getTextureRegion("orange_tree_harvest"),
                 assetHandler.getTextureRegion("orange2x")));
 
         trees.add(new Tree(3, "Cherry Tree",
                 "Small, but numerous. Great on sundaes.",
                 35 * 60 * 1000, 15 * 60 * 1000, 8, 75, 10,
-                assetHandler.getTextureRegion("cherry_tree2x"),
+                assetHandler.getTextureRegion("cherry_tree"),
+                assetHandler.getTextureRegion("cherry_tree_harvest"),
                 assetHandler.getTextureRegion("cherry2x")));
 
         trees.add(new Tree(4, "Peach Tree",
                 "Maaade in Georgiaaaaaaa",
                 75 * 60 * 1000, 45 * 60 * 1000, 3, 800, 100,
-                assetHandler.getTextureRegion("peach_tree8x"),
+                assetHandler.getTextureRegion("peach_tree"),
+                assetHandler.getTextureRegion("peach_tree_harvest"),
                 assetHandler.getTextureRegion("peach8x")));
 
         trees.add(new Tree(5, "Lemon Tree",
                 "Harsh to eat, but makes the best lemonade",
-                150 * 60 * 1000,  100 * 60 * 1000, 10, 350, 50,
+                150 * 60 * 1000, 100 * 60 * 1000, 10, 350, 50,
                 assetHandler.getTextureRegion("lemon_tree8x"),
+                assetHandler.getTextureRegion("tree8x"),
                 assetHandler.getTextureRegion("lemon8x")));
 
         trees.add(new Tree(6, "Sour Green Apple Tree",
                 "An upgrade from the original sweet apple, some would say",
                 4 * 60 * 60 * 1000, 240 * 60 * 1000, 6, 1500, 200,
                 assetHandler.getTextureRegion("green_apple_tree8x"),
+                assetHandler.getTextureRegion("tree8x"),
                 assetHandler.getTextureRegion("green_apple8x")));
 
         trees.add(new Tree(7, "Lychee Tree",
                 "Originally from China. The insides are sweet, and they like to grow in bunches.",
                 12 * 60 * 60 * 1000, 6 * 60 * 60 * 1000, 12, 2000, 150,
                 assetHandler.getTextureRegion("lychee_tree8x"),
+                assetHandler.getTextureRegion("tree8x"),
                 assetHandler.getTextureRegion("lychee8x")));
 
         for (Tree tree : trees) {
@@ -100,20 +107,6 @@ public class ItemManager {
         }
 
         upgrades = new ArrayList<>();
-
-        Tree appleTree = (Tree)findItemById(1);
-
-        upgrades.add(new Upgrade(64, "Apple Upgrade 1", "Apples are worth twice as much",
-
-                (id) -> {
-            int prodValue = appleTree.getProduceValue();
-            appleTree.setProduceValue(prodValue * 2);
-            },
-
-                () -> {
-            int count = StatsManager.getFruitCollected(appleTree);
-            return (count >= 100);
-            }, 375));
     }
 
     public static Item findItemById(int id) {

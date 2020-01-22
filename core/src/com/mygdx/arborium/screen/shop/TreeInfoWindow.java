@@ -12,8 +12,9 @@ import com.mygdx.arborium.game.ShopEntry;
 import com.mygdx.arborium.game.ShopManager;
 import com.mygdx.arborium.item.Item;
 import com.mygdx.arborium.item.Tree;
+import com.mygdx.arborium.item.Upgrade;
 
-public class ShopEntryWindow extends Window {
+public class TreeInfoWindow extends Window {
 
     private enum Category {
         GROW_TIME, PRODUCE_TIME, PRODUCE_AMOUNT, PRODUCE_VALUE
@@ -37,7 +38,7 @@ public class ShopEntryWindow extends Window {
     private Image[] treeStatIcons;
     private Label[] treeStatLabels;
 
-    public ShopEntryWindow(Arborium game, Skin skin) {
+    public TreeInfoWindow(Arborium game, Skin skin) {
         super("", skin);
         currentShopEntry = null;
 
@@ -77,49 +78,59 @@ public class ShopEntryWindow extends Window {
 
         resetWindow();
 
-        if (!ShopManager.isItemLocked(item)) {
+        if (!(item instanceof Upgrade)) {
+            if (!ShopManager.isItemLocked(item)) {
 
-            getTitleLabel().setText(item.getName());
+                getTitleLabel().setText(item.getName());
 
-            itemDrawable.setRegion(item.getTexture());
-            itemImage.setDrawable(itemDrawable);
+                itemDrawable.setRegion(item.getTexture());
+                itemImage.setDrawable(itemDrawable);
 
-            descriptionLabel.setText(item.getDescription());
+                descriptionLabel.setText(item.getDescription());
 
-            if (item instanceof Tree) {
-                Tree tree = (Tree) item;
-                treeStatLabels[0].setText("" + (tree.getGrowTime() / 1000 / 60) + " mins");
-                treeStatLabels[1].setText("" + (tree.getProduceTime() / 1000 / 60) + " mins");
-                treeStatLabels[2].setText("" + tree.getProduceAmount());
-                treeStatLabels[3].setText("" + tree.getProduceValue());
+                if (item instanceof Tree) {
+                    Tree tree = (Tree) item;
+                    treeStatLabels[0].setText("" + (tree.getGrowTime() / 1000 / 60) + " mins");
+                    treeStatLabels[1].setText("" + (tree.getProduceTime() / 1000 / 60) + " mins");
+                    treeStatLabels[2].setText("" + tree.getProduceAmount());
+                    treeStatLabels[3].setText("" + tree.getProduceValue());
 
-                this.row();
-
-                for (int i = 0; i < treeStatIcons.length; i++) {
-                    this.add(treeStatIcons[i]);
-                    this.add(treeStatLabels[i]);
                     this.row();
+
+                    for (int i = 0; i < treeStatIcons.length; i++) {
+                        this.add(treeStatIcons[i]);
+                        this.add(treeStatLabels[i]);
+                        this.row();
+                    }
                 }
+            }
+            else
+            {
+                getTitleLabel().setText("[LOCKED]");
+                descriptionLabel.setText("Unlocked at level " + ShopManager.getUnlockLevel(item));
             }
         }
 
         else {
-            getTitleLabel().setText("[LOCKED]");
-            itemDrawable.setRegion(game.getAssetHandler().getTextureRegion("locked8x"));
-            itemImage.setDrawable(itemDrawable);
-
-            descriptionLabel.setText("Unlocked at level " + ShopManager.getUnlockLevel(item));
+            Upgrade upgrade = (Upgrade)item;
+            if (upgrade.locked()) {
+                getTitleLabel().setText("[LOCKED]");
+                descriptionLabel.setText(((Upgrade)item).getUnlockDescription());
+            }
+            else {
+                getTitleLabel().setText(upgrade.getName());
+                descriptionLabel.setText(upgrade.getDescription());
+            }
         }
 
-        priceLabel.setText(ShopManager.getItemPrice(item));
+        int price = (item instanceof Upgrade) ? ((Upgrade)item).getPrice() : ShopManager.getItemPrice(item);
+        priceLabel.setText("" + price);
     }
 
     private void resetWindow() {
         this.clear();
-        this.add(itemImage).colspan(2).expandX();
         this.row();
-        this.add(descriptionLabel).colspan(2).pad(15).width(Value.percentWidth(0.75f, this));
-        this.row();
-        this.add(priceGroup).colspan(2).pad(15);
+        this.add(priceGroup).pad(15);
+        this.add(descriptionLabel).pad(15).width(Value.percentWidth(0.5f, this));
     }
 }

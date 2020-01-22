@@ -8,6 +8,7 @@ import com.mygdx.arborium.item.ItemManager;
 import com.mygdx.arborium.screen.GameScreen;
 import com.mygdx.arborium.screen.farm.FarmScreen;
 import com.mygdx.arborium.screen.shop.ShopScreen;
+import com.mygdx.arborium.screen.upgrade.UpgradeScreen;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -16,7 +17,7 @@ public class Arborium extends Game {
 
 	private final String SMALL_MAP = "map/FUCKMAP.tmx";
 	private final String MED_MAP = "map/arborMedMap.tmx";
-	private final String LARGE_MAP = "map/arborLargeMap.tmx";
+	private final String LARGE_MAP = "map/arborLargeMap1.tmx";
 	private final String HUGE_MAP = "map/arborHugeMap.tmx";
 
 	AssetHandler assetHandler;
@@ -28,12 +29,15 @@ public class Arborium extends Game {
 
 	ShopScreen shopScreen;
 
+	UpgradeScreen upgradeScreen;
+
 	@Override
 	public void create () {
         assetHandler = new AssetHandler();
         assetHandler.load();
 		ItemManager.init(assetHandler);
 		StatsManager.initialize();
+		UpgradeManager.initialize(assetHandler);
 		ExperienceManager.init();
 		CurrencyManager.init();
 		InventoryManager.init();
@@ -48,6 +52,7 @@ public class Arborium extends Game {
 		farmScreens.add(new FarmScreen(3, this, 32, HUGE_MAP, 50000));
 
 		shopScreen = new ShopScreen(this);
+		upgradeScreen = new UpgradeScreen(this);
 		pushScreen(farmScreens.get(farmScreenIndex));
 	}
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.input.GestureDetector;
@@ -316,17 +317,17 @@ public class FarmScreen extends GameScreen {
             Rectangle bounds = plot.getBounds();
 
             float x = bounds.x / 64;
-            float y = bounds.y / 64 + 1/2f;
+            float y = bounds.y / 64 + 3/8f;
 
             switch(plot.getState()) {
                 case GROWING:
                     spriteBatch.draw(sprout, x, y, 1, 1);
                     break;
                 case MATURE:
-                    spriteBatch.draw(matureTree, x, y, 1, 1);
+                    spriteBatch.draw(plot.getPlantedTree().getMatureTreeTexture(), x, y, 1, 1);
                     break;
                 case HARVESTABLE:
-                    spriteBatch.draw(plot.getPlantedTree().getTexture(), x, y, 1, 1);
+                    spriteBatch.draw(plot.getPlantedTree().getHarvestTreeTexture(), x, y, 1, 1);
             }
         }
 
@@ -340,7 +341,7 @@ public class FarmScreen extends GameScreen {
                 float x = bounds.x / 64;
                 float y = bounds.y / 64 + 1/2f;
 
-                spriteBatch.draw(focusedPlot.getPlantedTree().getTexture(), x, y, 1, 1);
+                spriteBatch.draw(focusedPlot.getPlantedTree().getHarvestTreeTexture(), x, y, 1, 1);
 
                 elapsedTime += delta;
 

@@ -1,136 +1,89 @@
 package com.mygdx.arborium.screen.shop;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Queue;
 import com.mygdx.arborium.game.Arborium;
 import com.mygdx.arborium.game.CurrencyManager;
 import com.mygdx.arborium.game.ShopManager;
+import com.mygdx.arborium.game.UpgradeManager;
 import com.mygdx.arborium.item.InventoryManager;
 import com.mygdx.arborium.item.Item;
 import com.mygdx.arborium.item.ItemManager;
+import com.mygdx.arborium.item.Upgrade;
 import com.mygdx.arborium.screen.GameScreen;
+import com.mygdx.arborium.screen.upgrade.ItemListWindow;
+import com.mygdx.arborium.ui.CurrencyLabel;
 
 public class ShopScreen extends GameScreen {
-
-    private Queue<String> categoryQueue;
-    private Queue<Item> itemQueue;
     private Item currentItem;
 
-    private String category;
+    private Skin skin;
 
-    private HorizontalGroup categoryGroup;
-    private Label categoryLabel;
-    private Button categoryLeft;
-    private Button categoryRight;
-
-    private HorizontalGroup currencyGroup;
-    private Image coinImage;
-    private Label currencyLabel;
+    private CurrencyLabel priceLabel;
     private TextButton buyButton;
-    private ImageButton itemSelectLeft;
-    private ImageButton itemSelectRight;
     private TextButton backButton;
 
-    private ShopEntryWindow treeShop;
+    private ButtonGroup categoryButtonGroup;
+    private HorizontalGroup categoryHorizGroup;
+    private TextButton treeCatButton;
+    private TextButton fertilizerCatButton;
+    private TextButton upgradeCatButton;
+
+    private int itemSelectIndex;
+    private ItemListWindow itemWindow;
+
+    private TreeInfoWindow treeShop;
+
+    private Texture testBg;
+    private TextureRegion bgRegion;
 
     public ShopScreen(final Arborium game) {
         super(game);
 
-        Skin skin = game.getAssetHandler().getSkin();
+        skin = game.getAssetHandler().getSkin();
 
-        category = "Trees";
+        categoryButtonGroup = new ButtonGroup();
+        categoryHorizGroup = new HorizontalGroup();
+        categoryButtonGroup.setMinCheckCount(1);
+        categoryButtonGroup.setMaxCheckCount(1);
 
-        categoryQueue = new Queue<>();
-        categoryQueue.addLast("Trees");
-        categoryQueue.addLast("Fertilizers");
+        treeCatButton = makeCategoryButton("Trees", ItemManager.getTreeList());
+        fertilizerCatButton = makeCategoryButton("Fertilizer", ItemManager.getFertilizerList());
+        upgradeCatButton = makeCategoryButton("Upgrades", UpgradeManager.getUpgradeArray());
 
-        categoryLabel = new Label(category, skin);
+        itemWindow = new ItemListWindow(skin, ItemManager.getTreeList());
+        itemSelectIndex = itemWindow.getCheckedButtonIndex();
+        currentItem = itemWindow.getSelectedItem();
 
-        itemQueue = new Queue<>();
-        for (Item item : ItemManager.getTreeList()) {
-            itemQueue.addLast(item);
-        }
-
-        currentItem = itemQueue.removeFirst();
-        itemQueue.addLast(currentItem);
-
-        treeShop = new ShopEntryWindow(game, skin);
+        treeShop = new TreeInfoWindow(game, skin);
         treeShop.setItem(currentItem);
-
-        categoryGroup = new HorizontalGroup();
-
-        categoryLeft = new ImageButton(skin, "left");
-        categoryLeft.addListener(new ClickListener() {
-           @Override
-           public void clicked(InputEvent event, float x, float y) {
-               category = categoryQueue.removeLast();
-               categoryQueue.addFirst(category);
-               updateCategory();
-           }
-        });
-
-        categoryRight = new ImageButton(skin, "right");
-        categoryRight.addListener(new ClickListener() {
-           @Override
-           public void clicked(InputEvent event, float x, float y) {
-               category = categoryQueue.removeFirst();
-               categoryQueue.addLast(category);
-               updateCategory();
-           }
-        });
-
-        categoryGroup.addActor(categoryLeft);
-        categoryGroup.addActor(categoryLabel);
-        categoryGroup.addActor(categoryRight);
 
         buyButton = new TextButton("Buy", skin);
         buyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (currentItem instanceof Upgrade) {
+                    if (CurrencyManager.subtract(((Upgrade) currentItem).getPrice())) {
+                        ((Upgrade) currentItem).apply();
+                    }
+                }
                 if (CurrencyManager.subtract(ShopManager.getItemPrice(currentItem)))
                     InventoryManager.addItem(currentItem);
             }
         });
 
-        updateCategory();
-
-        coinImage = new Image(new TextureRegionDrawable(game.getAssetHandler().getTextureRegion("coin4x")));
-        currencyLabel = new Label("" + CurrencyManager.getAmount(), skin);
-        currencyGroup = new HorizontalGroup();
-
-        currencyGroup.addActor(coinImage);
-        currencyGroup.addActor(currencyLabel);
-
-
-        itemSelectLeft = new ImageButton(skin, "left");
-        itemSelectLeft.addListener(new ClickListener() {
-           @Override
-           public void clicked(InputEvent event, float x, float y) {
-               currentItem = itemQueue.removeLast();
-               itemQueue.addFirst(currentItem);
-               updateItem();
-           }
-        });
-
-        itemSelectRight = new ImageButton(skin, "right");
-        itemSelectRight.addListener(new ClickListener() {
-           @Override
-           public void clicked(InputEvent event, float x, float y) {
-               currentItem = itemQueue.removeFirst();
-               itemQueue.addLast(currentItem);
-               updateItem();
-           }
-        });
+        priceLabel = new CurrencyLabel(game, skin);
 
         backButton = new TextButton("Back", skin);
         backButton.addListener(new ClickListener() {
@@ -139,54 +92,60 @@ public class ShopScreen extends GameScreen {
                game.popScreen();
            }
         });
-        UITable.add(currencyGroup).colspan(3);
-        UITable.row();
 
-        UITable.add(categoryGroup).colspan(3).pad(50).top();
+        UITable.add(priceLabel).colspan(3);
         UITable.row();
+        UITable.add(categoryHorizGroup).expandX();
+        UITable.row();
+        UITable.add(itemWindow).prefWidth(Gdx.graphics.getWidth()).height(Gdx.graphics.getHeight() / 2.5f);
+        UITable.row();
+        UITable.add(treeShop).prefWidth(Gdx.graphics.getWidth()).height(Gdx.graphics.getHeight() / 3);
+        UITable.row();
+        UITable.add(buyButton).colspan(3).pad(15).size(150, 75).expandY();
+        UITable.row();
+        UITable.add(backButton).colspan(3).size(150, 75).expandY();
 
-        UITable.add(itemSelectLeft);
-        UITable.add(treeShop).width(Gdx.graphics.getWidth() * 3/4);
-        UITable.add(itemSelectRight);
-        UITable.row();
-        UITable.add(buyButton).colspan(3).pad(15).size(150, 75);
-        UITable.row();
-        UITable.add(backButton).colspan(3).size(150, 75);
+        testBg = new Texture("frame1.png");
+        testBg.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        bgRegion = new TextureRegion(testBg, 1024, 1024);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
+        spriteBatch.begin();
+        spriteBatch.draw(bgRegion, 0, 0, 2, 2);
+        spriteBatch.end();
+
+        if (itemSelectIndex != itemWindow.getCheckedButtonIndex())
+        {
+            itemSelectIndex = itemWindow.getCheckedButtonIndex();
+            currentItem = itemWindow.getSelectedItem();
+            updateItem();
+        }
+
         stage.act(delta);
-        currencyLabel.setText("" + CurrencyManager.getAmount());
+        priceLabel.setPrice(CurrencyManager.getAmount());
         stage.draw();
-    }
-
-    private void updateCategory() {
-        categoryLabel.setText(category);
-
-        itemQueue.clear();
-        Item[] items;
-        switch(category) {
-            case "Trees":
-            default:
-                items = ItemManager.getTreeList();
-                break;
-            case "Fertilizers":
-                items = ItemManager.getFertilizerList();
-                break;
-        }
-
-        for (Item item : items) {
-                itemQueue.addLast(item);
-        }
-
-        currentItem = itemQueue.removeFirst();
-        itemQueue.addLast(currentItem);
-        updateItem();
     }
 
     private void updateItem() {
         treeShop.setItem(currentItem);
+    }
+
+    private TextButton makeCategoryButton(String name, Item[] catItems) {
+        TextButton button = new TextButton(name, skin, "toggle");
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                itemWindow.setItems(catItems);
+                treeShop.setItem(catItems[0]);
+            }
+        });
+
+        categoryButtonGroup.add(button);
+        categoryHorizGroup.addActor(button);
+
+        return button;
     }
 }
