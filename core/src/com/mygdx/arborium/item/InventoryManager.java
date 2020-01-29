@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class InventoryManager {
+    private static boolean newGame;
+
     private static HashMap<Item, Integer> inventory;
     private static Preferences preferences;
 
@@ -17,8 +19,18 @@ public class InventoryManager {
     }
 
     public static void load() {
+        // If this is a new game, we add 2 Miracle Grows to the inventory
+        newGame = preferences.getBoolean("NewGame", true);
+        if (newGame) {
+            addItem(ItemManager.findItemById(38));
+            addItem(ItemManager.findItemById(38));
+            preferences.putBoolean("NewGame", false);
+        }
+
         Set<String> itemKeys = preferences.get().keySet();
         for (String key : itemKeys) {
+            if (key.equals("NewGame"))
+                continue;
             int parsed = Integer.parseInt(key);
             Item item = ItemManager.findItemById(parsed);
             inventory.put(item, preferences.getInteger(key));

@@ -37,9 +37,6 @@ public class ItemButton extends ImageButton {
             upgrade.update();
             if (upgrade.locked())
                 getImage().setColor(Color.BLACK);
-
-            if (upgrade.enabled())
-                setDisabled(true);
         }
 
         //update();

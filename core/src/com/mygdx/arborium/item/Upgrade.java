@@ -42,6 +42,10 @@ public class Upgrade extends Item{
         this.price = price;
 
         load();
+
+        if (enabled) {
+            apply();
+        }
     }
 
     // Check to see if we need to unlock

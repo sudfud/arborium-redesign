@@ -17,7 +17,7 @@ public class Arborium extends Game {
 
 	private final String SMALL_MAP = "map/FUCKMAP.tmx";
 	private final String MED_MAP = "map/arborMedMap.tmx";
-	private final String LARGE_MAP = "map/arborLargeMap1.tmx";
+	private final String LARGE_MAP = "map/large.tmx";
 	private final String HUGE_MAP = "map/arborHugeMap.tmx";
 
 	AssetHandler assetHandler;
@@ -46,10 +46,9 @@ public class Arborium extends Game {
 		screenStack = new Stack<>();
 
 		farmScreens = new ArrayList<>();
-		farmScreens.add(new FarmScreen(1,this, 4, "map/arborSmallMap.tmx"));
-		farmScreens.add(new FarmScreen(1, this, 8,  MED_MAP, 500));
-		farmScreens.add(new FarmScreen(2, this, 16, LARGE_MAP, 5000));
-		farmScreens.add(new FarmScreen(3, this, 32, HUGE_MAP, 50000));
+		farmScreens.add(new FarmScreen(1, this, 8,  MED_MAP));
+		farmScreens.add(new FarmScreen(2, this, 16, LARGE_MAP, 1500));
+		farmScreens.add(new FarmScreen(3, this, 32, HUGE_MAP, 15000));
 
 		shopScreen = new ShopScreen(this);
 		upgradeScreen = new UpgradeScreen(this);

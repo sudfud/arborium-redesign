@@ -121,8 +121,6 @@ public class FarmScreen extends GameScreen {
     // Are we harvesting a tree right now?
     boolean harvesting = false;
 
-    // TEST
-
     public FarmScreen(int id, Arborium arborium, int plotCount, String mapDir)
     {
         super(arborium);
@@ -151,6 +149,10 @@ public class FarmScreen extends GameScreen {
             totalPlotCount++;
         }
         focusedPlot = null;
+
+        for (Plot plot : plots) {
+            plot.load();
+        }
 
         // UI initialization
         skin = game.getAssetHandler().getSkin();
@@ -263,13 +265,18 @@ public class FarmScreen extends GameScreen {
     @Override
     public void show() {
         resetInputProcessor();
-        for (Plot plot : plots) {
-            plot.load();
-        }
         if (locked)
             showLockedUI();
         else
             showUI();
+
+        camera.zoom = 7.5f;
+        int mapWidth = tileMap.getProperties().get("width", Integer.class);
+        int mapHeight = tileMap.getProperties().get("height", Integer.class);
+
+        camera.position.set(mapWidth / 2f, mapHeight / 2f, 0);
+        camera.zoom = 7.5f;
+        camera.update();
     }
 
     @Override
@@ -313,15 +320,19 @@ public class FarmScreen extends GameScreen {
         // Render sprites
         spriteBatch.begin();
 
+        // Render each plot's tree, if it has one
         for (Plot plot : plots) {
             Rectangle bounds = plot.getBounds();
 
             float x = bounds.x / 64;
             float y = bounds.y / 64 + 3/8f;
 
-            switch(plot.getState()) {
+            Tree plantedTree = plot.getPlantedTree();
+
+            if (plantedTree != null)
+                switch(plot.getState()) {
                 case GROWING:
-                    spriteBatch.draw(sprout, x, y, 1, 1);
+                    spriteBatch.draw(plantedTree.getSpriteFrame(plot.getTimeSincePlanted()), x, y, 1, 1);
                     break;
                 case MATURE:
                     spriteBatch.draw(plot.getPlantedTree().getMatureTreeTexture(), x, y, 1, 1);
@@ -339,7 +350,7 @@ public class FarmScreen extends GameScreen {
                 Rectangle bounds = focusedPlot.getBounds();
 
                 float x = bounds.x / 64;
-                float y = bounds.y / 64 + 1/2f;
+                float y = bounds.y / 64 + 3/8f;
 
                 spriteBatch.draw(focusedPlot.getPlantedTree().getHarvestTreeTexture(), x, y, 1, 1);
 
@@ -396,10 +407,12 @@ public class FarmScreen extends GameScreen {
 
         currencyLabel.setText("" + CurrencyManager.getAmount());
 
+        // Update exp bar
         float a = ExperienceManager.getExperience() - ExperienceManager.getPrevLevelThreshold();
         float b = ExperienceManager.getNextLevelThreshold() - ExperienceManager.getPrevLevelThreshold();
         expBar.setValue(a / b * 100f);
 
+        // Level up if needed
         if (currentLevel < ExperienceManager.getLevel()) {
             levelUpLabel.setPosition(0, 0);
             levelUpLabel.getColor().a = 1f;
@@ -473,7 +486,7 @@ public class FarmScreen extends GameScreen {
         makeFruit();
     }
 
-    void makeFruit() {
+    private void makeFruit() {
 
         Tree tree = focusedPlot.getPlantedTree();
         Rectangle bounds = focusedPlot.getBounds();
@@ -506,7 +519,7 @@ public class FarmScreen extends GameScreen {
     }
 
     // Center and zoom the camera on a specific plot
-    public void focusOn(Plot plot) {
+    private void focusOn(Plot plot) {
         focusedPlot = plot;
 
         Rectangle bounds = focusedPlot.getBounds();
@@ -518,10 +531,7 @@ public class FarmScreen extends GameScreen {
     }
 
     // Return the camera to the center of the screen and zoom out
-    public void unfocus() {
-        int mapWidth = tileMap.getProperties().get("width", Integer.class);
-        int mapHeight = tileMap.getProperties().get("height", Integer.class);
-
+    private void unfocus() {
         //target = new Vector3(mapWidth / 2f, mapHeight / 2f, 0);
         lerpElapsed = 0;
 

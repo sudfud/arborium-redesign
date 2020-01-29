@@ -8,6 +8,8 @@ public class ExperienceManager {
 
     private static final int LVL_EXP = 100;
 
+    private static final double MULTIPLIER = 1.75d;
+
     private static final String EXP_KEY = "Experience";
     private static final String LVL_KEY = "Level";
     private static final String THRESHOLD_KEY = "Threshold";
@@ -27,7 +29,7 @@ public class ExperienceManager {
         experience += exp;
         if (experience >= nextLevelThreshold) {
             level++;
-            nextLevelThreshold = (int) (LVL_EXP * Math.pow((double) level, 1.5d));
+            nextLevelThreshold = (int) (LVL_EXP * Math.pow((double) level, MULTIPLIER));
 
             Gdx.app.log("ExpMang", "Level up!!! Lvl: " + level + ", Exp. to next level: " + (nextLevelThreshold - experience));
         }
@@ -51,7 +53,7 @@ public class ExperienceManager {
             return 0;
         }
         else
-            return (int) (LVL_EXP * Math.pow((double) level - 1, 1.5d));
+            return (int) (LVL_EXP * Math.pow((double) level - 1, MULTIPLIER));
     }
 
     public static int getExpToNextLevel() {

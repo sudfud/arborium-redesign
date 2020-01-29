@@ -11,6 +11,8 @@ public class Tree extends Item {
     private int produceValue;   // Value of the fruit this tree produces
     private int experience;     // Experience gained per harvest
 
+    private TextureRegion[] sprites;
+
     private TextureRegion matureTreeTexture;
     private TextureRegion harvestTreeTexture;
     private TextureRegion fruitTexture;
@@ -19,11 +21,9 @@ public class Tree extends Item {
 
     public Tree(int id, String name, String description, long growTime, long prodTime,
                 int prodAmt, int prodValue, int exp,
-                TextureRegion matureTreeTexture,
-                TextureRegion harvestTreeTexture,
-                TextureRegion fruitTexture) {
+                TextureRegion[] sprites, TextureRegion fruitTexture) {
 
-        super(id, name, description, harvestTreeTexture);
+        super(id, name, description, sprites[sprites.length - 1]);
 
         this.growTime = growTime;
         this.produceTime = prodTime;
@@ -31,11 +31,23 @@ public class Tree extends Item {
         this.produceValue = prodValue;
         this.experience = exp;
 
-        this.matureTreeTexture = matureTreeTexture;
-        this.harvestTreeTexture = harvestTreeTexture;
+        this.matureTreeTexture = sprites[sprites.length - 2];
+        this.harvestTreeTexture = sprites[sprites.length - 1];
         this.fruitTexture = fruitTexture;
+
+        this.sprites = sprites;
     }
     // Getters and setters
+
+    public TextureRegion getSpriteFrame(long time) {
+        float ratio = (float)time / (float)growTime;
+        if (ratio >= 1)
+            return matureTreeTexture;
+        else if (ratio <= 1 / 3f)
+            return sprites[0];
+        else
+            return sprites[1];
+    }
 
     public void setGrowTime(long growTime) {
         this.growTime = growTime;

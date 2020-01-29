@@ -14,6 +14,8 @@ import java.util.concurrent.TimeUnit;
 public class Plot implements ISaveable {
 
     private final int id;
+
+    // Keys for saving and loading plot info
     private final String stateKey;
     private final String treeIdKey;
     private final String plantTimeKey;
@@ -83,7 +85,7 @@ public class Plot implements ISaveable {
                 timeSincePlanted = TimeUtils.timeSinceMillis(plantedTimestamp);
                 if (timeSincePlanted >= plantedTree.getGrowTime() * matureTimeMultiplier) {
                     currentState = PlotState.MATURE;
-                    produceTimestamp = time;
+                    produceTimestamp = time - (long)(timeSincePlanted - plantedTree.getGrowTime() * matureTimeMultiplier);
                     save();
                 }
                 break;
@@ -104,6 +106,7 @@ public class Plot implements ISaveable {
         plantedTimestamp = TimeUtils.millis();
         produceTimestamp = TimeUtils.millis();
         treeId = tree.getId();
+        StatsManager.incTreesPlanted();
         save();
     }
 
@@ -137,15 +140,19 @@ public class Plot implements ISaveable {
         produceAmountExtra = preferences.getInteger(prodAmtMultiKey, 0);
         expMultiplier = preferences.getFloat(expMultiKey, 1f);
 
+        // No tree planted yet
         if (treeId == -1) {
             plantedTree = null;
         }
+
+        // Tree is planted, check to see what state it's in
         else {
             plantedTree = (Tree)ItemManager.findItemById(treeId);
             if (currentState == PlotState.GROWING) {
                 timeSincePlanted = TimeUtils.timeSinceMillis(plantedTimestamp);
                 if (timeSincePlanted > plantedTree.getGrowTime() * matureTimeMultiplier) {
                     currentState = PlotState.MATURE;
+                    produceTimestamp = TimeUtils.millis() - (long)(timeSincePlanted - plantedTree.getGrowTime() * matureTimeMultiplier);
                 }
             }
             if (currentState == PlotState.MATURE) {
@@ -156,7 +163,7 @@ public class Plot implements ISaveable {
             }
         }
 
-
+        // Check if plot is fertilized
         int fertId = preferences.getInteger(fertilizerKey, -1);
         if (fertId != -1)
             fertilizer = (Fertilizer)ItemManager.findItemById(fertId);
@@ -206,6 +213,14 @@ public class Plot implements ISaveable {
 
     public PlotState getState() {
         return currentState;
+    }
+
+    public void setState(PlotState state) {
+        currentState = state;
+    }
+
+    public long getTimeSincePlanted() {
+        return timeSincePlanted;
     }
 
     public float getMatureTimeMultiplier() {
@@ -269,22 +284,6 @@ public class Plot implements ISaveable {
                         TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
                 TimeUnit.MILLISECONDS.toSeconds(millis) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-    }
-
-    private void updateState() {
-        long time = TimeUtils.millis();
-
-        if (treeId == -1) {
-            currentState = PlotState.EMPTY;
-        }
-
-        else
-        {
-            // If it's not either, it's still growing
-            if (currentState != PlotState.MATURE && currentState != PlotState.HARVESTABLE) {
-                currentState = PlotState.GROWING;
-            }
-        }
     }
 
     @Override

@@ -33,20 +33,21 @@ public class ShopManager {
         shopItems.add(new ShopEntry(ItemManager.findItemById(7), 1000000, 110));
 
         // Produce amount fertilizer
-        shopItems.add(new ShopEntry(ItemManager.findItemById(32), 300, 10));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(32), 150, 10));
 
         // Grow rate fertilizer
-        shopItems.add(new ShopEntry(ItemManager.findItemById(33), 1500, 20));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(33), 750, 20));
 
         // Produce rate fertilizer
-        shopItems.add(new ShopEntry(ItemManager.findItemById(34), 4000, 30));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(34), 2000, 30));
 
-        shopItems.add(new ShopEntry(ItemManager.findItemById(35), 15000, 40));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(35), 7500, 40));
 
-        shopItems.add(new ShopEntry(ItemManager.findItemById(36), 75000, 50));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(36), 37500, 50));
 
-        shopItems.add(new ShopEntry(ItemManager.findItemById(37), 200000, 60));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(37), 100000, 60));
 
+        shopItems.add(new ShopEntry(ItemManager.findItemById(38), 100000000, 200));
     }
 
     public static int getItemPrice(Item item) {

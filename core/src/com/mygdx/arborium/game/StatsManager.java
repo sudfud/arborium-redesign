@@ -12,7 +12,10 @@ public class StatsManager
 {
     private static Preferences preferences;
 
+    private static final String treePlantKey = "TreesPlanted";
     private String[] fruitCollectedKeys;
+
+    private static int treesPlanted;
 
     private static Tree[] trees;
 
@@ -29,6 +32,15 @@ public class StatsManager
         load();
     }
 
+    public static int getTreesPlanted() {
+        return treesPlanted;
+    }
+
+    public static void incTreesPlanted() {
+        treesPlanted++;
+        save();
+    }
+
     public static int getFruitCollected(Tree tree) {
         return totalFruitCollected.get(tree);
     }
@@ -36,6 +48,7 @@ public class StatsManager
     public static void incFruitCollected(Tree tree) {
         int frt = totalFruitCollected.get(tree);
         totalFruitCollected.put(tree, frt + 1);
+        save();
     }
 
     public static void load() {
@@ -43,12 +56,14 @@ public class StatsManager
             int frtCollect = preferences.getInteger(tree.getId() + "Frt Collect", 0);
             totalFruitCollected.put(tree, frtCollect);
         }
+        treesPlanted = preferences.getInteger(treePlantKey, 0);
     }
 
     public static void save() {
         for (Tree tree : trees) {
             preferences.putInteger(tree.getId() + "Frt Collect", totalFruitCollected.get(tree));
         }
+        preferences.putInteger(treePlantKey, treesPlanted);
         preferences.flush();
     }
 }

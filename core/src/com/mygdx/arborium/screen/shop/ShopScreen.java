@@ -74,7 +74,8 @@ public class ShopScreen extends GameScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (currentItem instanceof Upgrade) {
-                    if (CurrencyManager.subtract(((Upgrade) currentItem).getPrice())) {
+                    Upgrade upgrade = (Upgrade) currentItem;
+                    if (!upgrade.locked() && !upgrade.enabled() && CurrencyManager.subtract(upgrade.getPrice())) {
                         ((Upgrade) currentItem).apply();
                     }
                 }
@@ -131,6 +132,15 @@ public class ShopScreen extends GameScreen {
 
     private void updateItem() {
         treeShop.setItem(currentItem);
+        if (currentItem instanceof Upgrade) {
+            Upgrade upgrade = (Upgrade)currentItem;
+            if (!upgrade.enabled())
+                buyButton.setVisible(!upgrade.locked());
+            else
+                buyButton.setVisible(false);
+        }
+        else
+            buyButton.setVisible(!ShopManager.isItemLocked(currentItem));
     }
 
     private TextButton makeCategoryButton(String name, Item[] catItems) {
@@ -140,6 +150,8 @@ public class ShopScreen extends GameScreen {
             public void clicked(InputEvent event, float x, float y) {
                 itemWindow.setItems(catItems);
                 treeShop.setItem(catItems[0]);
+                currentItem = catItems[0];
+                updateItem();
             }
         });
 
