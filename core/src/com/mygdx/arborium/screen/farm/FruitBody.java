@@ -32,7 +32,7 @@ public class FruitBody {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circle;
-        fixtureDef.density = 0.5f;
+        fixtureDef.density = 0.75f;
         fixtureDef.friction = 0.4f;
         fixtureDef.filter.categoryBits = 0x1;
         fixtureDef.filter.maskBits = 0x1 << 1;

@@ -1,13 +1,10 @@
-package com.mygdx.arborium.screen.upgrade;
+package com.mygdx.arborium.ui;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.mygdx.arborium.game.ShopManager;
+import com.mygdx.arborium.manager.ShopManager;
 import com.mygdx.arborium.item.Fertilizer;
 import com.mygdx.arborium.item.Item;
 import com.mygdx.arborium.item.Tree;

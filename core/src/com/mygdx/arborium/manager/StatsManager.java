@@ -1,8 +1,8 @@
-package com.mygdx.arborium.game;
+package com.mygdx.arborium.manager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.mygdx.arborium.item.ItemManager;
+import com.mygdx.arborium.manager.ItemManager;
 import com.mygdx.arborium.item.Tree;
 
 import java.util.HashMap;

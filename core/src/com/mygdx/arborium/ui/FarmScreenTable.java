@@ -1,10 +1,9 @@
-package com.mygdx.arborium.screen.farm;
+package com.mygdx.arborium.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
-import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -15,10 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.arborium.game.Plot;
 import com.mygdx.arborium.item.Fertilizer;
-import com.mygdx.arborium.item.InventoryManager;
+import com.mygdx.arborium.manager.InventoryManager;
 import com.mygdx.arborium.item.Item;
-import com.mygdx.arborium.item.ItemManager;
+import com.mygdx.arborium.manager.ItemManager;
 import com.mygdx.arborium.item.Tree;
+import com.mygdx.arborium.screen.farm.FarmScreen;
 
 public class FarmScreenTable extends Window {
     private FarmScreen farmScreen;
@@ -100,6 +100,7 @@ public class FarmScreenTable extends Window {
                 if (!harvestButton.isDisabled()) {
                     harvest();
                     farmScreen.beginHarvest();
+                    farmScreen.hidePlotInfoWindow();
                 }
             }
         });
@@ -126,6 +127,7 @@ public class FarmScreenTable extends Window {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 goToFarmScreen();
+                farmScreen.unfocus();
             }
         });
 

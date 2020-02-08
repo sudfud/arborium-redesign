@@ -1,4 +1,4 @@
-package com.mygdx.arborium.screen.shop;
+package com.mygdx.arborium.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.arborium.game.Arborium;
 import com.mygdx.arborium.game.ShopEntry;
-import com.mygdx.arborium.game.ShopManager;
+import com.mygdx.arborium.manager.ShopManager;
 import com.mygdx.arborium.item.Item;
 import com.mygdx.arborium.item.Tree;
 import com.mygdx.arborium.item.Upgrade;

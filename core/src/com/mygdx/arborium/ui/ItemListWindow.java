@@ -1,4 +1,4 @@
-package com.mygdx.arborium.screen.upgrade;
+package com.mygdx.arborium.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;

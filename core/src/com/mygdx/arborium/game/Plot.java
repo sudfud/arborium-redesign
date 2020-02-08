@@ -1,12 +1,14 @@
 package com.mygdx.arborium.game;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.arborium.item.Fertilizer;
-import com.mygdx.arborium.item.ItemManager;
+import com.mygdx.arborium.manager.ItemManager;
 import com.mygdx.arborium.item.Tree;
+import com.mygdx.arborium.manager.StatsManager;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -278,6 +280,8 @@ public class Plot implements ISaveable {
     // Use this to convert time in milliseconds to a more human-readable format
     private String timeFormat(long millis)
     {
+        if (Gdx.app.getType() == Application.ApplicationType.WebGL || Gdx.app.getType() == Application.ApplicationType.Applet)
+            return "" + millis;
         return String.format("%02d:%02d:%02d",
                 TimeUnit.MILLISECONDS.toHours(millis),
                 TimeUnit.MILLISECONDS.toMinutes(millis) -

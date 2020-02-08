@@ -1,7 +1,8 @@
-package com.mygdx.arborium.game;
+package com.mygdx.arborium.manager;
 
+import com.mygdx.arborium.game.ShopEntry;
 import com.mygdx.arborium.item.Item;
-import com.mygdx.arborium.item.ItemManager;
+import com.mygdx.arborium.manager.ItemManager;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class ShopManager {
         shopItems.add(new ShopEntry(ItemManager.findItemById(1), 50));
 
         // Orange tree
-        shopItems.add(new ShopEntry(ItemManager.findItemById(2), 200, 5));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(2), 175, 5));
 
         // Cherry tree
         shopItems.add(new ShopEntry(ItemManager.findItemById(3), 1200, 15));
@@ -27,7 +28,7 @@ public class ShopManager {
         shopItems.add(new ShopEntry(ItemManager.findItemById(5), 30000, 50));
 
         // Green Apple tree
-        shopItems.add(new ShopEntry(ItemManager.findItemById(6), 350000, 75));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(6), 100000, 75));
 
         // Lychee tree
         shopItems.add(new ShopEntry(ItemManager.findItemById(7), 1000000, 110));

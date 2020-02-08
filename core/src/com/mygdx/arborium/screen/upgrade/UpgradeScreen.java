@@ -7,10 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.mygdx.arborium.game.Arborium;
-import com.mygdx.arborium.game.UpgradeManager;
+import com.mygdx.arborium.manager.UpgradeManager;
 import com.mygdx.arborium.item.Upgrade;
 import com.mygdx.arborium.screen.GameScreen;
 import com.mygdx.arborium.ui.CurrencyLabel;
+import com.mygdx.arborium.ui.ItemListWindow;
 
 public class UpgradeScreen extends GameScreen {
 

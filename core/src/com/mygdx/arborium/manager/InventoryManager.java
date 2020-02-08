@@ -1,7 +1,8 @@
-package com.mygdx.arborium.item;
+package com.mygdx.arborium.manager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.mygdx.arborium.item.Item;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -14,7 +15,7 @@ public class InventoryManager {
 
     public static void init() {
         inventory = new HashMap<>();
-        preferences = Gdx.app.getPreferences("Arborium_Inventory");
+        preferences = Gdx.app.getPreferences("Arborium");
         load();
     }
 

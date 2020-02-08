@@ -11,19 +11,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Queue;
 import com.mygdx.arborium.game.Arborium;
-import com.mygdx.arborium.game.CurrencyManager;
-import com.mygdx.arborium.game.ShopManager;
-import com.mygdx.arborium.game.UpgradeManager;
-import com.mygdx.arborium.item.InventoryManager;
+import com.mygdx.arborium.manager.CurrencyManager;
+import com.mygdx.arborium.manager.ShopManager;
+import com.mygdx.arborium.manager.UpgradeManager;
+import com.mygdx.arborium.manager.InventoryManager;
 import com.mygdx.arborium.item.Item;
-import com.mygdx.arborium.item.ItemManager;
+import com.mygdx.arborium.manager.ItemManager;
 import com.mygdx.arborium.item.Upgrade;
 import com.mygdx.arborium.screen.GameScreen;
-import com.mygdx.arborium.screen.upgrade.ItemListWindow;
+import com.mygdx.arborium.ui.ItemListWindow;
 import com.mygdx.arborium.ui.CurrencyLabel;
+import com.mygdx.arborium.ui.TreeInfoWindow;
 
 public class ShopScreen extends GameScreen {
     private Item currentItem;
@@ -94,17 +96,18 @@ public class ShopScreen extends GameScreen {
            }
         });
 
-        UITable.add(priceLabel).colspan(3);
+        UITable.add(priceLabel).colspan(2);
         UITable.row();
-        UITable.add(categoryHorizGroup).expandX();
+        UITable.add(categoryHorizGroup).expandX().colspan(2);
         UITable.row();
-        UITable.add(itemWindow).prefWidth(Gdx.graphics.getWidth()).height(Gdx.graphics.getHeight() / 2.5f);
+        UITable.add(itemWindow).prefWidth(Value.percentWidth(0.4f, UITable))
+                .height(Value.percentHeight(0.75f, UITable));
+        // UITable.row();
+        UITable.add(treeShop).prefWidth(Value.percentWidth(0.4f, UITable))
+                .height(Value.percentHeight(0.75f, UITable));
         UITable.row();
-        UITable.add(treeShop).prefWidth(Gdx.graphics.getWidth()).height(Gdx.graphics.getHeight() / 3);
-        UITable.row();
-        UITable.add(buyButton).colspan(3).pad(15).size(150, 75).expandY();
-        UITable.row();
-        UITable.add(backButton).colspan(3).size(150, 75).expandY();
+        UITable.add(buyButton).pad(15).size(150, 75).right();
+        UITable.add(backButton).size(150, 75).left();
 
         testBg = new Texture("frame1.png");
         testBg.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -115,7 +118,7 @@ public class ShopScreen extends GameScreen {
     public void render(float delta) {
         super.render(delta);
         spriteBatch.begin();
-        spriteBatch.draw(bgRegion, 0, 0, 2, 2);
+        spriteBatch.draw(bgRegion, 0, 0, 4, 4);
         spriteBatch.end();
 
         if (itemSelectIndex != itemWindow.getCheckedButtonIndex())

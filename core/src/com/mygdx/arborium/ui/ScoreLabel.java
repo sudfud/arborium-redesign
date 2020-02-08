@@ -1,4 +1,4 @@
-package com.mygdx.arborium.screen.farm;
+package com.mygdx.arborium.ui;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.parallel;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
@@ -37,7 +37,7 @@ public class ScoreLabel extends Table {
 
         this.addAction(sequence(parallel(
                 fadeOut(1),
-                Actions.moveTo(x, y  + 50, 1)),
+                Actions.moveTo(x, y  + 100, 1)),
                 run(new Runnable() {
                     @Override
                     public void run() {

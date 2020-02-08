@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.input.GestureDetector;
@@ -34,12 +33,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.arborium.game.Arborium;
-import com.mygdx.arborium.game.CurrencyManager;
-import com.mygdx.arborium.game.ExperienceManager;
+import com.mygdx.arborium.manager.CurrencyManager;
+import com.mygdx.arborium.manager.ExperienceManager;
 import com.mygdx.arborium.game.Plot;
-import com.mygdx.arborium.game.StatsManager;
+import com.mygdx.arborium.manager.StatsManager;
 import com.mygdx.arborium.item.Tree;
 import com.mygdx.arborium.screen.GameScreen;
+import com.mygdx.arborium.ui.FarmScreenTable;
+import com.mygdx.arborium.ui.ScoreLabel;
+import com.mygdx.arborium.ui.WelcomeWindow;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -49,6 +51,8 @@ public class FarmScreen extends GameScreen {
 
     private int id;
 
+    private final float MAX_ZOOM = 5.25f;
+    
     private static int totalPlotCount = 0;
     private ArrayList<Plot> plots;
 
@@ -75,6 +79,7 @@ public class FarmScreen extends GameScreen {
     private ImageButton leftButton;
     private ImageButton rightButton;
     private TextButton shopButton;
+    private TextButton statsButton;
 
     private Label lockedLabel;
     private HorizontalGroup priceGroup;
@@ -90,6 +95,8 @@ public class FarmScreen extends GameScreen {
     ArrayList<ScoreLabel> scoreLabels;
     Stack<ScoreLabel> scoreLabelStack;
 
+    WelcomeWindow welcomeWindow;
+
     // Input
     private GestureDetector gestureDetector;
 
@@ -102,7 +109,7 @@ public class FarmScreen extends GameScreen {
     Vector3 target;
     Vector3 camPosition;
     float lerpElapsed = 2f;
-    float fromZoom = 7.5f;
+    float fromZoom = MAX_ZOOM;
     float toZoom = 5f;
 
     // Box2D stuff
@@ -192,6 +199,13 @@ public class FarmScreen extends GameScreen {
            }
         });
 
+        statsButton = new TextButton("Stats", skin);
+        statsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.toStatsScreen();
+            }
+        });
 
         currentLevel = ExperienceManager.getLevel();
         currentLevelLabel = new Label("Lvl. " + currentLevel, skin);
@@ -225,7 +239,6 @@ public class FarmScreen extends GameScreen {
            }
         });
 
-        stage.addActor(UITable);
         priceGroup.addActor(coin2);
         priceGroup.addActor(priceLabel);
 
@@ -251,7 +264,10 @@ public class FarmScreen extends GameScreen {
         // Sound initialization
         fruitPickSound = Gdx.audio.newSound(Gdx.files.internal("audio/pop1.wav"));
 
-        showUI();
+        //showUI();
+
+        welcomeWindow = new WelcomeWindow(skin, this);
+        UITable.add(welcomeWindow);
     }
 
     public FarmScreen(int id, Arborium arborium, int plotCount, String mapDir, int farmCost) {
@@ -270,12 +286,11 @@ public class FarmScreen extends GameScreen {
         else
             showUI();
 
-        camera.zoom = 7.5f;
         int mapWidth = tileMap.getProperties().get("width", Integer.class);
         int mapHeight = tileMap.getProperties().get("height", Integer.class);
 
         camera.position.set(mapWidth / 2f, mapHeight / 2f, 0);
-        camera.zoom = 7.5f;
+        camera.zoom = MAX_ZOOM;
         camera.update();
     }
 
@@ -294,7 +309,7 @@ public class FarmScreen extends GameScreen {
         int mapHeight = tileMap.getProperties().get("height", Integer.class);
 
         camera.position.set(mapWidth / 2f, mapHeight / 2f, 0);
-        camera.zoom = 7.5f;
+        camera.zoom = MAX_ZOOM;
         camera.update();
         spriteBatch = new SpriteBatch();
         spriteBatch.setProjectionMatrix(camera.combined);
@@ -398,7 +413,7 @@ public class FarmScreen extends GameScreen {
             camera.zoom = MathUtils.lerp(camera.zoom, toZoom, lerpElapsed);
             lerpElapsed += delta / 2f;
         }
-        else if (lerpElapsed > 1f && toZoom == 7.5f && focusedPlot != null) {
+        else if (lerpElapsed > 1f && toZoom == MAX_ZOOM && focusedPlot != null) {
             focusedPlot = null;
         }
 
@@ -474,12 +489,11 @@ public class FarmScreen extends GameScreen {
         focusOn(plot);
     }
 
-    void hidePlotInfoWindow() {
+    public void hidePlotInfoWindow() {
         farmScreenTable.setVisible(false);
-        unfocus();
     }
 
-    void beginHarvest() {
+    public void beginHarvest() {
         harvesting = true;
         fruitCount = 0;
         fruitCollect = 0;
@@ -531,12 +545,12 @@ public class FarmScreen extends GameScreen {
     }
 
     // Return the camera to the center of the screen and zoom out
-    private void unfocus() {
+    public void unfocus() {
         //target = new Vector3(mapWidth / 2f, mapHeight / 2f, 0);
         lerpElapsed = 0;
 
         fromZoom = camera.zoom;
-        toZoom = 7.5f;
+        toZoom = MAX_ZOOM;
     }
 
     // Call this when you want to regain control of the farm
@@ -553,31 +567,38 @@ public class FarmScreen extends GameScreen {
         preferences.flush();
     }
 
-    private void showUI() {
+     public void showUI() {
         UITable.clear();
-        UITable.add(currencyGroup).colspan(3).center();
-        UITable.row();
-        UITable.add(farmScreenTable).colspan(3).expand().bottom();
-        UITable.row();
-        UITable.add(currentLevelLabel);
-        UITable.add(expBar).padTop(50).padBottom(15).width(Value.percentWidth(.5f, UITable)).height(25);
-        UITable.row();
-        UITable.add(leftButton);
-        UITable.add(shopButton).size(150, 75);
-        UITable.add(rightButton);
+
+        if (welcomeWindow.isVisible())
+            UITable.add(welcomeWindow).width(Value.percentWidth(0.8f, UITable));
+
+        else {
+            UITable.add(currencyGroup).colspan(4).center();
+            UITable.row();
+            UITable.add(farmScreenTable).colspan(4).expand().bottom();
+            UITable.row();
+            UITable.add(currentLevelLabel);
+            UITable.add(expBar).padTop(50).padBottom(15).width(Value.percentWidth(.5f, UITable)).height(25).expandX();
+            UITable.row();
+            UITable.add(leftButton);
+            UITable.add(shopButton).size(150, 75).expandX();
+            UITable.add(statsButton).size(150, 75).expandX();
+            UITable.add(rightButton);
+        }
     }
 
     private void showLockedUI() {
         priceLabel.setText("" + farmCost);
 
         UITable.clear();
-        UITable.add(currencyGroup).colspan(3).center();
+        UITable.add(currencyGroup).colspan(4).center();
         UITable.row();
-        UITable.add(lockedLabel).colspan(3).expand();
+        UITable.add(lockedLabel).colspan(4).expand();
         UITable.row();
-        UITable.add(priceGroup).colspan(3);
+        UITable.add(priceGroup).colspan(4);
         UITable.row();
-        UITable.add(unlockButton).colspan(3);
+        UITable.add(unlockButton).colspan(4);
         UITable.row();
         UITable.add(leftButton);
         UITable.add(shopButton).size(150, 75).expandX();

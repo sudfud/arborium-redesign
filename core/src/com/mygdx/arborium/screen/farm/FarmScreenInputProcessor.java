@@ -12,10 +12,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.mygdx.arborium.game.CurrencyManager;
-import com.mygdx.arborium.game.ExperienceManager;
+import com.mygdx.arborium.manager.CurrencyManager;
+import com.mygdx.arborium.manager.ExperienceManager;
 import com.mygdx.arborium.game.Plot;
-import com.mygdx.arborium.game.StatsManager;
+import com.mygdx.arborium.manager.StatsManager;
 import com.mygdx.arborium.item.Tree;
 
 import java.util.ArrayList;
@@ -59,6 +59,7 @@ public class FarmScreenInputProcessor implements GestureListener {
         // Check to see if a fruit on screen was tapped
         if (farmScreen.harvesting && farmScreen.physWorld.getBodyCount() > 0) {
             screenCoords.set(x, y, 0);
+            Gdx.app.log("Input", "" + x + ", " + y);
             worldCoords = farmScreen.getCamera().unproject(screenCoords);
             for (Body body : farmScreen.fruitBodies) {
                 Fixture fixture = body.getFixtureList().get(0);
@@ -67,7 +68,8 @@ public class FarmScreenInputProcessor implements GestureListener {
                     farmScreen.fruitCollect++;
                     StatsManager.incFruitCollected(farmScreen.getFocusedPlot().getPlantedTree());
                     screenCoords = farmScreen.getCamera().project(worldCoords);
-                    farmScreen.createScoreLabel(screenCoords.x, screenCoords.y);
+                    Vector2 stageCoords = farmScreen.stage.screenToStageCoordinates(new Vector2(x, y));
+                    farmScreen.createScoreLabel(stageCoords.x, stageCoords.y);
 
                     Tree tree = farmScreen.getFocusedPlot().getPlantedTree();
                     ExperienceManager.addExperience(tree.getExperience());

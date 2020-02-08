@@ -1,6 +1,6 @@
-package com.mygdx.arborium.game;
+package com.mygdx.arborium.manager;
 
-import com.mygdx.arborium.item.ItemManager;
+import com.mygdx.arborium.manager.ItemManager;
 import com.mygdx.arborium.item.Tree;
 import com.mygdx.arborium.item.Upgrade;
 import com.mygdx.arborium.screen.AssetHandler;
@@ -18,8 +18,21 @@ public class UpgradeManager {
         Tree cherryTree = (Tree)ItemManager.findItemById(3);
 
         upgrades.add(new Upgrade(64, "Apple Upgrade 1",
-                "Apple trees produce 2 extra apples",
+                "Apples are worth twice as much",
                 "Harvest 100 apples to unlock!",
+                assetHandler.getTextureRegion("apple2x"),
+                (id) -> {
+                    int prodValue = appleTree.getProduceValue();
+                    appleTree.setProduceValue(prodValue * 2);
+                },
+                () -> {
+                    int count = StatsManager.getFruitCollected(appleTree);
+                    return (count >= 100);
+                }, 100));
+
+        upgrades.add(new Upgrade(65, "Apple Upgrade 2",
+                "Apple trees produce 2 extra apples",
+                "Harvest 500 apples to unlock!",
                 assetHandler.getTextureRegion("apple2x"),
                 (id) -> {
                     int prodAmt = appleTree.getProduceAmount();
@@ -28,10 +41,10 @@ public class UpgradeManager {
 
                 () -> {
                     int count = StatsManager.getFruitCollected(appleTree);
-                    return (count >= 100);
-                }, 275));
+                    return (count >= 500);
+                }, 350));
 
-        upgrades.add(new Upgrade(65, "Orange Upgrade 1",
+        upgrades.add(new Upgrade(66, "Orange Upgrade 1",
                 "Oranges grow 25% faster",
                 "Harvest 100 oranges to unlock!",
                 assetHandler.getTextureRegion("orange2x"),
@@ -42,20 +55,8 @@ public class UpgradeManager {
                 () -> {
                     int count = StatsManager.getFruitCollected(orangeTree);
                     return (count >= 100);
-                }, 700));
+                }, 675));
 
-        upgrades.add(new Upgrade(66, "Apple Upgrade 2",
-                "Apples are worth twice as much",
-                "Harvest 500 apples to unlock!",
-                assetHandler.getTextureRegion("apple2x"),
-                (id) -> {
-                    int prodValue = appleTree.getProduceValue();
-                    appleTree.setProduceValue(prodValue * 2);
-                },
-                () -> {
-                    int count = StatsManager.getFruitCollected(appleTree);
-                    return (count >= 500);
-                }, 1500));
 
         upgrades.add(new Upgrade(67, "Cherry Upgrade 1",
                 "Cherries give 50% extra exp",
@@ -68,9 +69,22 @@ public class UpgradeManager {
                 () -> {
                     int count = StatsManager.getFruitCollected(cherryTree);
                     return (count >= 100);
-                }, 2250));
+                }, 2500));
 
-        upgrades.add(new Upgrade(68, "Automated Sprinklers",
+        upgrades.add(new Upgrade(68, "Orange Upgrade 2",
+                "Oranges are worth twice as much",
+                "Harvest 500 oranges to unlock!",
+                assetHandler.getTextureRegion("orange2x"),
+                (id) -> {
+                    int prodValue = orangeTree.getProduceValue();
+                    orangeTree.setProduceValue(prodValue * 2);
+                },
+                () -> {
+                    int count = StatsManager.getFruitCollected(orangeTree);
+                    return (count >= 500);
+                }, 3250));
+
+        upgrades.add(new Upgrade(69, "Automated Sprinklers",
                 "Reduce grow time of all trees by 5%",
                 "Plant 15 trees to unlock!",
                 assetHandler.getTextureRegion("grow_time_icon8x"),

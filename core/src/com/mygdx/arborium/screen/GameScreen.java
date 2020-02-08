@@ -1,5 +1,6 @@
 package com.mygdx.arborium.screen;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
@@ -14,17 +15,23 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.arborium.game.Arborium;
 
 // Base game class
 
 public abstract class GameScreen implements Screen {
 
+    final int WORLD_WIDTH = 100;
+    final int WORLD_HEIGHT = 100;
+
     protected Arborium game;
 
     protected OrthographicCamera camera;
 
-    protected Stage stage;
+    private Viewport viewport;
+    public Stage stage;
     protected Table UITable;
 
     protected SpriteBatch spriteBatch;
@@ -34,8 +41,17 @@ public abstract class GameScreen implements Screen {
 
         spriteBatch = new SpriteBatch();
         spriteBatch.enableBlending();
-        camera = new OrthographicCamera();
-        stage = new Stage(new ScreenViewport());
+
+        float w = Gdx.graphics.getWidth();
+        float h = Gdx.graphics.getHeight();
+
+        camera = new OrthographicCamera(30 * (w / h), 30);
+        if (Gdx.app.getType() == Application.ApplicationType.Desktop)
+            viewport = new ExtendViewport(1250, 1250, new OrthographicCamera());
+        else
+            viewport = new ExtendViewport(750, 750, new OrthographicCamera());
+        viewport.update((int)w, (int)h);
+        stage = new Stage(viewport);
         UITable = new Table();
         UITable.setFillParent(true);
         stage.addActor(UITable);
@@ -56,7 +72,6 @@ public abstract class GameScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         float aspectRatio = (float)width / (float)height;
-
         camera.setToOrtho(false, 2f * aspectRatio, 2f);
         camera.update();
     }

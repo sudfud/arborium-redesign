@@ -2,6 +2,7 @@ package com.mygdx.arborium.item;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.arborium.game.Plot;
+import com.mygdx.arborium.manager.InventoryManager;
 
 import java.util.function.Consumer;
 

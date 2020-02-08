@@ -1,8 +1,11 @@
-package com.mygdx.arborium.item;
+package com.mygdx.arborium.manager;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.arborium.game.Plot;
-import com.mygdx.arborium.game.StatsManager;
+import com.mygdx.arborium.item.Fertilizer;
+import com.mygdx.arborium.item.Item;
+import com.mygdx.arborium.item.Tree;
+import com.mygdx.arborium.item.Upgrade;
 import com.mygdx.arborium.screen.AssetHandler;
 
 import java.util.ArrayList;
@@ -25,42 +28,39 @@ public class ItemManager {
 
         trees.add(new Tree(2, "Orange Tree",
                 "Deliciously citrus.",
-                10 * 60 * 1000, 4 * 60 * 1000, 2, 20, 50,
+                5 * 60 * 1000, (int)(2.5 * 60 * 1000), 2, 15, 50,
                 makeTreeSpriteArray("orange_tree", assetHandler),
                 assetHandler.getTextureRegion("orange2x")));
 
         trees.add(new Tree(3, "Cherry Tree",
                 "Small, but numerous. Great on sundaes.",
-                45 * 60 * 1000, 20 * 60 * 1000, 8, 30, 40,
+                25 * 60 * 1000, 10 * 60 * 1000, 8, 20, 40,
                 makeTreeSpriteArray("cherry_tree", assetHandler),
                 assetHandler.getTextureRegion("cherry2x")));
 
         trees.add(new Tree(4, "Peach Tree",
                 "Maaade in Georgiaaaaaaa",
-                90 * 60 * 1000, 60 * 60 * 1000, 3, 100, 100,
+                75 * 60 * 1000, 30 * 60 * 1000, 3, 100, 100,
                 makeTreeSpriteArray("peach_tree", assetHandler),
                 assetHandler.getTextureRegion("peach8x")));
 
-//        trees.add(new Tree(5, "Lemon Tree",
-//                "Harsh to eat, but makes the best lemonade",
-//                150 * 60 * 1000, 100 * 60 * 1000, 10, 350, 50,
-//                assetHandler.getTextureRegion("lemon_tree8x"),
-//                assetHandler.getTextureRegion("tree8x"),
-//                assetHandler.getTextureRegion("lemon8x")));
-//
-//        trees.add(new Tree(6, "Sour Green Apple Tree",
-//                "An upgrade from the original sweet apple, some would say",
-//                4 * 60 * 60 * 1000, 240 * 60 * 1000, 6, 1500, 200,
-//                assetHandler.getTextureRegion("green_apple_tree8x"),
-//                assetHandler.getTextureRegion("tree8x"),
-//                assetHandler.getTextureRegion("green_apple8x")));
-//
-//        trees.add(new Tree(7, "Lychee Tree",
-//                "Originally from China. The insides are sweet, and they like to grow in bunches.",
-//                12 * 60 * 60 * 1000, 6 * 60 * 60 * 1000, 12, 2000, 150,
-//                assetHandler.getTextureRegion("lychee_tree8x"),
-//                assetHandler.getTextureRegion("tree8x"),
-//                assetHandler.getTextureRegion("lychee8x")));
+        trees.add(new Tree(5, "Lemon Tree",
+                "Harsh to eat, but makes the best lemonade",
+                150 * 60 * 1000, 100 * 60 * 1000, 10, 100, 50,
+                makeTreeSpriteArray(assetHandler.getTextureRegion("lemon_tree8x"), assetHandler),
+                assetHandler.getTextureRegion("lemon8x")));
+
+        trees.add(new Tree(6, "Sour Green Apple Tree",
+                "An upgrade from the original sweet apple, some would say",
+                4 * 60 * 60 * 1000, 240 * 60 * 1000, 6, 500, 200,
+                makeTreeSpriteArray(assetHandler.getTextureRegion("green_apple_tree8x"), assetHandler),
+                assetHandler.getTextureRegion("green_apple8x")));
+
+        trees.add(new Tree(7, "Lychee Tree",
+                "Originally from China. The insides are sweet, and they like to grow in bunches.",
+                12 * 60 * 60 * 1000, 6 * 60 * 60 * 1000, 12, 600, 150,
+                makeTreeSpriteArray(assetHandler.getTextureRegion("lychee_tree8x"), assetHandler),
+                assetHandler.getTextureRegion("lychee8x")));
 
         for (Tree tree : trees) {
             itemMap.put(tree.getId(), tree);
@@ -131,13 +131,20 @@ public class ItemManager {
     }
 
     private static TextureRegion[] makeTreeSpriteArray(String prefix, AssetHandler assetHandler) {
-        TextureRegion[] sprites = {
+        return new TextureRegion[] {
                 assetHandler.getTextureRegion(prefix + "_baby"),
                 assetHandler.getTextureRegion(prefix + "_teen"),
                 assetHandler.getTextureRegion(prefix),
                 assetHandler.getTextureRegion(prefix + "_harvest")
         };
+    }
 
-        return sprites;
+    private static TextureRegion[] makeTreeSpriteArray(TextureRegion tree, AssetHandler assetHandler) {
+        return new TextureRegion[] {
+                assetHandler.getTextureRegion("plant8x"),
+                assetHandler.getTextureRegion("plant8x"),
+                assetHandler.getTextureRegion("tree8x"),
+                tree
+        };
     }
 }

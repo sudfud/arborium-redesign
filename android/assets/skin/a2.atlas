@@ -13,6 +13,14 @@ repeat: none
   orig: 32, 32
   offset: 0, 0
   index: -1
+greenb
+  rotate: false
+  xy: 387, 72
+  size: 32, 32
+  split: 16, 15, 16, 15
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 window
   rotate: false
   xy: 387, 72
@@ -31,7 +39,7 @@ window
   index: -1
 7
   rotate: false
-  xy: 554, 679
+  xy: 606, 733
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
@@ -77,14 +85,14 @@ green_pressed
   index: -1
 greenbutton
   rotate: false
-  xy: 966, 973
+  xy: 508, 631
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 greenbutt
   rotate: false
-  xy: 966, 973
+  xy: 508, 631
   size: 14, 14
   split: 6, 6, 3, 5
   orig: 14, 14
@@ -92,7 +100,7 @@ greenbutt
   index: -1
 left
   rotate: false
-  xy: 606, 739
+  xy: 650, 783
   size: 8, 6
   orig: 8, 6
   offset: 0, 0
@@ -107,7 +115,7 @@ pane
   index: -1
 scroll.png
   rotate: false
-  xy: 508, 615
+  xy: 554, 661
   size: 12, 30
   split: 5, 5, 3, 3
   orig: 12, 30
@@ -181,6 +189,13 @@ greenbuttpressed
   orig: 42, 42
   offset: 0, 0
   index: -1
+x
+  rotate: false
+  xy: 966, 969
+  size: 15, 18
+  orig: 15, 18
+  offset: 0, 0
+  index: -1
 apple2x
   rotate: false
   xy: 691, 859
@@ -215,7 +230,7 @@ greenboard2
   index: -1
 right
   rotate: false
-  xy: 650, 783
+  xy: 95, 52
   size: 8, 6
   orig: 8, 6
   offset: 0, 0

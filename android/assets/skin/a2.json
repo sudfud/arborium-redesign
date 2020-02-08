@@ -89,6 +89,12 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 		checked: greenbuttpressed
 		disabled: greenbuttpressed
 	}
+	toggle: {
+		imageChecked: x
+		up: biggreenbutt
+		down: greenbuttpressed
+		checked: greenbuttpressed
+	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {

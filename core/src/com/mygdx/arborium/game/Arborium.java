@@ -2,10 +2,17 @@ package com.mygdx.arborium.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.mygdx.arborium.item.InventoryManager;
+import com.mygdx.arborium.manager.CurrencyManager;
+import com.mygdx.arborium.manager.ExperienceManager;
+import com.mygdx.arborium.manager.InventoryManager;
+import com.mygdx.arborium.manager.ShopManager;
+import com.mygdx.arborium.manager.StatsManager;
+import com.mygdx.arborium.manager.UpgradeManager;
 import com.mygdx.arborium.screen.AssetHandler;
-import com.mygdx.arborium.item.ItemManager;
+import com.mygdx.arborium.manager.ItemManager;
 import com.mygdx.arborium.screen.GameScreen;
+import com.mygdx.arborium.screen.OptionScreen;
+import com.mygdx.arborium.screen.StatsScreen;
 import com.mygdx.arborium.screen.farm.FarmScreen;
 import com.mygdx.arborium.screen.shop.ShopScreen;
 import com.mygdx.arborium.screen.upgrade.UpgradeScreen;
@@ -28,13 +35,15 @@ public class Arborium extends Game {
 	private int farmScreenIndex = 0;
 
 	ShopScreen shopScreen;
-
 	UpgradeScreen upgradeScreen;
+	StatsScreen statsScreen;
+	OptionScreen optionScreen;
 
 	@Override
 	public void create () {
         assetHandler = new AssetHandler();
         assetHandler.load();
+        Settings.init();
 		ItemManager.init(assetHandler);
 		StatsManager.initialize();
 		UpgradeManager.initialize(assetHandler);
@@ -47,12 +56,15 @@ public class Arborium extends Game {
 
 		farmScreens = new ArrayList<>();
 		farmScreens.add(new FarmScreen(1, this, 8,  MED_MAP));
-		farmScreens.add(new FarmScreen(2, this, 16, LARGE_MAP, 1500));
-		farmScreens.add(new FarmScreen(3, this, 32, HUGE_MAP, 15000));
+		farmScreens.add(new FarmScreen(2, this, 16, LARGE_MAP, 500));
+		farmScreens.add(new FarmScreen(3, this, 32, HUGE_MAP, 5000));
 
 		shopScreen = new ShopScreen(this);
 		upgradeScreen = new UpgradeScreen(this);
+		statsScreen = new StatsScreen(this);
+		optionScreen = new OptionScreen(this);
 		pushScreen(farmScreens.get(farmScreenIndex));
+		//pushScreen(optionScreen);
 	}
 
 	@Override
@@ -76,6 +88,10 @@ public class Arborium extends Game {
 
 	public void toShopScreen() {
 		pushScreen(shopScreen);
+	}
+
+	public void toStatsScreen() {
+		pushScreen(statsScreen);
 	}
 
 	public void previousFarmScreen() {

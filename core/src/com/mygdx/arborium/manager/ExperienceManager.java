@@ -1,4 +1,4 @@
-package com.mygdx.arborium.game;
+package com.mygdx.arborium.manager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class ExperienceManager {
 
-    private static final int LVL_EXP = 100;
+    private static final int LVL_EXP = 150;
 
     private static final double MULTIPLIER = 1.75d;
 
