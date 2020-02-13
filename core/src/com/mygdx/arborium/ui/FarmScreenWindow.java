@@ -20,7 +20,7 @@ import com.mygdx.arborium.manager.ItemManager;
 import com.mygdx.arborium.item.Tree;
 import com.mygdx.arborium.screen.farm.FarmScreen;
 
-public class FarmScreenTable extends Window {
+public class FarmScreenWindow extends Window {
     private FarmScreen farmScreen;
 
     private Plot plot;
@@ -46,7 +46,7 @@ public class FarmScreenTable extends Window {
     private float w = Gdx.graphics.getWidth();
     private float h = Gdx.graphics.getHeight();
 
-    public FarmScreenTable(final FarmScreen farmScreen, final Plot plot, Skin skin) {
+    public FarmScreenWindow(final FarmScreen farmScreen, final Plot plot, Skin skin) {
         super("", skin);
 
         this.farmScreen = farmScreen;
@@ -255,7 +255,6 @@ public class FarmScreenTable extends Window {
     }
 
     private void clearPlot() {
-        plot.clear();
-        showInfoWindow();
+        farmScreen.showConfirmWindow();
     }
 }

@@ -21,7 +21,7 @@ public class OptionScreen extends GameScreen {
     private Label fullscreenLabel;
     private ImageButton soundOnToggle;
     private Label soundLabel;
-    private SelectBox<Vector2> resSelectBox;
+    private SelectBox<Settings.Resolution> resSelectBox;
     private TextButton resApplyButton;
 
     public OptionScreen(Arborium game) {
@@ -54,9 +54,15 @@ public class OptionScreen extends GameScreen {
            }
         });
 
-        resSelectBox.setItems(Settings.getResolutions());
+        resApplyButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Settings.setResolutionIndex(resSelectBox.getSelectedIndex());
+                Settings.update();
+            }
+        });
 
-        optionsWindow.setFillParent(true);
+        resSelectBox.setItems(Settings.getResolutions());
 
         optionsWindow.add(fullscreenLabel);
         optionsWindow.add(fullscreenToggle);
@@ -67,7 +73,7 @@ public class OptionScreen extends GameScreen {
         optionsWindow.add(resSelectBox).colspan(2);
         optionsWindow.add(resApplyButton);
 
-        UITable.add(optionsWindow).width(Value.percentWidth(0.8f, UITable));
+        UITable.add(optionsWindow).size((Value.percentWidth(0.5f, UITable)));
     }
 
     @Override

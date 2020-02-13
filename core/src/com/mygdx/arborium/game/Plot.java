@@ -127,6 +127,7 @@ public class Plot implements ISaveable {
         currentState = PlotState.EMPTY;
         plantedTree = null;
         treeId = -1;
+        resetMultipliers();
     }
 
     @Override
@@ -280,8 +281,8 @@ public class Plot implements ISaveable {
     // Use this to convert time in milliseconds to a more human-readable format
     private String timeFormat(long millis)
     {
-        if (Gdx.app.getType() == Application.ApplicationType.WebGL || Gdx.app.getType() == Application.ApplicationType.Applet)
-            return "" + millis;
+       // if (Gdx.app.getType() == Application.ApplicationType.WebGL || Gdx.app.getType() == Application.ApplicationType.Applet)
+        //    return "" + millis;
         return String.format("%02d:%02d:%02d",
                 TimeUnit.MILLISECONDS.toHours(millis),
                 TimeUnit.MILLISECONDS.toMinutes(millis) -

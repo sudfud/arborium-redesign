@@ -15,6 +15,9 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	serif_outline_16: {
 		file: serif_outline_16.fnt
 	}
+	serif_outline_2: {
+		file: serif_outline_2.fnt
+	}
 }
 com.badlogic.gdx.graphics.Color: {
 	RGBA_0_0_0_255: {
@@ -99,6 +102,9 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {
 		font: _serif_48
+	}
+	large: {
+		font: serif_outline_2
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {

@@ -8,7 +8,7 @@ public class ExperienceManager {
 
     private static final int LVL_EXP = 150;
 
-    private static final double MULTIPLIER = 1.75d;
+    private static final double MULTIPLIER = 1.85d;
 
     private static final String EXP_KEY = "Experience";
     private static final String LVL_KEY = "Level";

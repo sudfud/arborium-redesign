@@ -19,34 +19,34 @@ public class ShopManager {
         shopItems.add(new ShopEntry(ItemManager.findItemById(2), 175, 5));
 
         // Cherry tree
-        shopItems.add(new ShopEntry(ItemManager.findItemById(3), 1200, 15));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(3), 1000, 15));
 
         // Peach tree
-        shopItems.add(new ShopEntry(ItemManager.findItemById(4), 7500, 30));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(4), 5500, 30));
 
         // Lemon tree
-        shopItems.add(new ShopEntry(ItemManager.findItemById(5), 30000, 50));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(5), 15000, 50));
 
         // Green Apple tree
-        shopItems.add(new ShopEntry(ItemManager.findItemById(6), 100000, 75));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(6), 50000, 75));
 
         // Lychee tree
-        shopItems.add(new ShopEntry(ItemManager.findItemById(7), 1000000, 110));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(7), 200000, 110));
 
         // Produce amount fertilizer
-        shopItems.add(new ShopEntry(ItemManager.findItemById(32), 150, 10));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(32), 100, 2));
 
         // Grow rate fertilizer
-        shopItems.add(new ShopEntry(ItemManager.findItemById(33), 750, 20));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(33), 350, 8));
 
         // Produce rate fertilizer
-        shopItems.add(new ShopEntry(ItemManager.findItemById(34), 2000, 30));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(34), 1350, 16));
 
-        shopItems.add(new ShopEntry(ItemManager.findItemById(35), 7500, 40));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(35), 7500, 32));
 
-        shopItems.add(new ShopEntry(ItemManager.findItemById(36), 37500, 50));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(36), 37500, 56));
 
-        shopItems.add(new ShopEntry(ItemManager.findItemById(37), 100000, 60));
+        shopItems.add(new ShopEntry(ItemManager.findItemById(37), 100000, 100));
 
         shopItems.add(new ShopEntry(ItemManager.findItemById(38), 100000000, 200));
     }
@@ -58,6 +58,15 @@ public class ShopManager {
             }
         }
         return -1;
+    }
+
+    public static void setItemPrice(Item item, int price) {
+        for (ShopEntry entry : shopItems) {
+            if (item == entry.getItem()) {
+                entry.setPrice(price);
+                return;
+            }
+        }
     }
 
     public static boolean isItemLocked(Item item) {

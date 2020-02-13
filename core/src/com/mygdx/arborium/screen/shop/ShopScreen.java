@@ -96,15 +96,32 @@ public class ShopScreen extends GameScreen {
            }
         });
 
+        // DESKTOP UI
+
+//        UITable.add(priceLabel).colspan(2);
+//        UITable.row();
+//        UITable.add(categoryHorizGroup).expandX().colspan(2);
+//        UITable.row();
+//        UITable.add(itemWindow).prefWidth(Value.percentWidth(0.4f, UITable))
+//                .height(Value.percentHeight(0.75f, UITable));
+//        // UITable.row();
+//        UITable.add(treeShop).prefWidth(Value.percentWidth(0.4f, UITable))
+//                .height(Value.percentHeight(0.75f, UITable));
+//        UITable.row();
+//        UITable.add(buyButton).pad(15).size(150, 75).right();
+//        UITable.add(backButton).size(150, 75).left();
+
+        // MOBILE UI
+
         UITable.add(priceLabel).colspan(2);
         UITable.row();
         UITable.add(categoryHorizGroup).expandX().colspan(2);
         UITable.row();
-        UITable.add(itemWindow).prefWidth(Value.percentWidth(0.4f, UITable))
-                .height(Value.percentHeight(0.75f, UITable));
-        // UITable.row();
-        UITable.add(treeShop).prefWidth(Value.percentWidth(0.4f, UITable))
-                .height(Value.percentHeight(0.75f, UITable));
+        UITable.add(itemWindow).prefWidth(Value.percentWidth(0.75f, UITable))
+                .height(Value.percentHeight(0.45f, UITable)).colspan(2);
+        UITable.row();
+        UITable.add(treeShop).prefWidth(Value.percentWidth(0.75f, UITable))
+                .height(Value.percentHeight(0.35f, UITable)).colspan(2);
         UITable.row();
         UITable.add(buyButton).pad(15).size(150, 75).right();
         UITable.add(backButton).size(150, 75).left();

@@ -6,7 +6,7 @@ filter: Linear,Linear
 repeat: none
 16
   rotate: false
-  xy: 387, 72
+  xy: 291, 89
   size: 32, 32
   split: 12, 13, 16, 15
   pad: 16, 15, 16, 15
@@ -15,7 +15,7 @@ repeat: none
   index: -1
 greenb
   rotate: false
-  xy: 387, 72
+  xy: 291, 89
   size: 32, 32
   split: 16, 15, 16, 15
   orig: 32, 32
@@ -23,7 +23,7 @@ greenb
   index: -1
 window
   rotate: false
-  xy: 387, 72
+  xy: 291, 89
   size: 32, 32
   split: 12, 13, 16, 15
   pad: 16, 15, 16, 15
@@ -32,28 +32,28 @@ window
   index: -1
 2
   rotate: false
-  xy: 508, 693
+  xy: 895, 379
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: -1
 7
   rotate: false
-  xy: 606, 733
+  xy: 341, 113
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 712_serif
   rotate: false
-  xy: 1, 861
+  xy: 509, 924
   size: 505, 99
   orig: 505, 99
   offset: 0, 0
   index: -1
 brown
   rotate: false
-  xy: 1, 10
+  xy: 1, 31
   size: 48, 48
   split: 11, 23, 24, 23
   orig: 48, 48
@@ -61,7 +61,7 @@ brown
   index: -1
 brown_inlay
   rotate: false
-  xy: 508, 647
+  xy: 341, 127
   size: 44, 44
   split: 9, 21, 22, 21
   orig: 44, 44
@@ -69,7 +69,7 @@ brown_inlay
   index: -1
 green
   rotate: false
-  xy: 387, 106
+  xy: 291, 123
   size: 48, 48
   split: 3, 3, 3, 5
   orig: 48, 48
@@ -77,7 +77,7 @@ green
   index: -1
 green_pressed
   rotate: false
-  xy: 691, 809
+  xy: 895, 329
   size: 48, 48
   split: 2, 2, 2, 2
   orig: 48, 48
@@ -85,14 +85,14 @@ green_pressed
   index: -1
 greenbutton
   rotate: false
-  xy: 508, 631
+  xy: 325, 107
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 greenbutt
   rotate: false
-  xy: 508, 631
+  xy: 325, 107
   size: 14, 14
   split: 6, 6, 3, 5
   orig: 14, 14
@@ -100,14 +100,14 @@ greenbutt
   index: -1
 left
   rotate: false
-  xy: 650, 783
+  xy: 291, 81
   size: 8, 6
   orig: 8, 6
   offset: 0, 0
   index: -1
 pane
   rotate: false
-  xy: 821, 891
+  xy: 895, 477
   size: 96, 96
   split: 45, 47, 48, 47
   orig: 96, 96
@@ -115,7 +115,7 @@ pane
   index: -1
 scroll.png
   rotate: false
-  xy: 554, 661
+  xy: 993, 523
   size: 12, 30
   split: 5, 5, 3, 3
   orig: 12, 30
@@ -123,14 +123,14 @@ scroll.png
   index: -1
 serif_16
   rotate: false
-  xy: 509, 989
+  xy: 1, 567
   size: 505, 34
   orig: 505, 34
   offset: 0, 0
   index: -1
 serif_outline
   rotate: false
-  xy: 1, 642
+  xy: 509, 705
   size: 505, 217
   orig: 505, 217
   offset: 0, 0
@@ -144,14 +144,14 @@ serif_outline_16
   index: -1
 712_serif
   rotate: false
-  xy: 1, 446
+  xy: 1, 371
   size: 505, 194
   orig: 505, 194
   offset: 0, 0
   index: -1
 buttonSquare_brown
   rotate: false
-  xy: 919, 938
+  xy: 51, 30
   size: 45, 49
   split: 7, 7, 16, 19
   orig: 45, 49
@@ -159,7 +159,7 @@ buttonSquare_brown
   index: -1
 buttonSquare_brown_4x
   rotate: false
-  xy: 509, 791
+  xy: 291, 173
   size: 180, 196
   split: 28, 28, 64, 76
   orig: 180, 196
@@ -167,7 +167,7 @@ buttonSquare_brown_4x
   index: -1
 expBar3.png
   rotate: false
-  xy: 1, 1
+  xy: 473, 362
   size: 33, 7
   split: 9, 9, 3, 3
   orig: 33, 7
@@ -175,7 +175,7 @@ expBar3.png
   index: -1
 expamt
   rotate: false
-  xy: 821, 887
+  xy: 895, 325
   size: 32, 2
   split: 0, 0, 0, 0
   orig: 32, 2
@@ -183,36 +183,43 @@ expamt
   index: -1
 greenbuttpressed
   rotate: false
-  xy: 51, 16
+  xy: 98, 37
   size: 42, 42
   split: 18, 18, 15, 9
   orig: 42, 42
   offset: 0, 0
   index: -1
+serif_outline_2
+  rotate: false
+  xy: 1, 603
+  size: 506, 357
+  orig: 506, 357
+  offset: 0, 0
+  index: -1
 x
   rotate: false
-  xy: 966, 969
+  xy: 473, 342
   size: 15, 18
   orig: 15, 18
   offset: 0, 0
   index: -1
 apple2x
   rotate: false
-  xy: 691, 859
+  xy: 895, 575
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 2-1.png
   rotate: false
-  xy: 387, 156
+  xy: 1, 81
   size: 288, 288
   orig: 288, 288
   offset: 0, 0
   index: -1
 greenboard
   rotate: false
-  xy: 387, 156
+  xy: 1, 81
   size: 288, 288
   split: 144, 141, 144, 138
   pad: 55, 54, 144, 138
@@ -221,7 +228,7 @@ greenboard
   index: -1
 greenboard2
   rotate: false
-  xy: 387, 156
+  xy: 1, 81
   size: 288, 288
   split: 144, 141, 144, 138
   pad: 50, 50, 80, 80
@@ -230,14 +237,14 @@ greenboard2
   index: -1
 right
   rotate: false
-  xy: 95, 52
+  xy: 31, 23
   size: 8, 6
   orig: 8, 6
   offset: 0, 0
   index: -1
 biggreenboard.png
   rotate: false
-  xy: 1, 60
+  xy: 509, 319
   size: 384, 384
   split: 192, 186, 192, 189
   orig: 384, 384
@@ -245,21 +252,21 @@ biggreenboard.png
   index: -1
 greenbutton-1.png
   rotate: false
-  xy: 437, 126
+  xy: 1, 1
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 greenbutton-1.png(1)
   rotate: false
-  xy: 606, 747
+  xy: 945, 335
   size: 42, 42
   orig: 42, 42
   offset: 0, 0
   index: -1
 biggreenbutt
   rotate: false
-  xy: 606, 747
+  xy: 945, 335
   size: 42, 42
   split: 18, 18, 9, 15
   orig: 42, 42
@@ -267,21 +274,21 @@ biggreenbutt
   index: -1
 left-1.png
   rotate: false
-  xy: 691, 795
+  xy: 142, 67
   size: 16, 12
   orig: 16, 12
   offset: 0, 0
   index: -1
 left-1.png(1)
   rotate: false
-  xy: 741, 839
+  xy: 993, 555
   size: 24, 18
   orig: 24, 18
   offset: 0, 0
   index: -1
 right-1.png
   rotate: false
-  xy: 919, 918
+  xy: 387, 153
   size: 24, 18
   orig: 24, 18
   offset: 0, 0

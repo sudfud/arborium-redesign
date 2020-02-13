@@ -1,0 +1,17 @@
+{
+"characters": "",
+"size": 64,
+"hinting": "Medium",
+"color": "RGBA_255_255_255_255",
+"colorValue": -1,
+"gamma": 1.8,
+"renderCount": 2,
+"borderWidth": 4,
+"borderColor": "RGBA_0_0_0_255",
+"borderColorValue": 255,
+"borderGamma": 1.8,
+"spaceX": -4,
+"kerning": true,
+"minFilter": "Nearest",
+"magFilter": "Nearest"
+}

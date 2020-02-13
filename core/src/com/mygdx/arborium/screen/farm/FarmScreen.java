@@ -23,12 +23,14 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -39,13 +41,14 @@ import com.mygdx.arborium.game.Plot;
 import com.mygdx.arborium.manager.StatsManager;
 import com.mygdx.arborium.item.Tree;
 import com.mygdx.arborium.screen.GameScreen;
-import com.mygdx.arborium.ui.FarmScreenTable;
+import com.mygdx.arborium.ui.ConfirmWindow;
+import com.mygdx.arborium.ui.FarmScreenWindow;
 import com.mygdx.arborium.ui.ScoreLabel;
 import com.mygdx.arborium.ui.WelcomeWindow;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Stack;
+
 
 public class FarmScreen extends GameScreen {
 
@@ -70,12 +73,14 @@ public class FarmScreen extends GameScreen {
     private Plot focusedPlot;   // The plot we're currently looking at;
 
     // UI
+    private Stack uiStack;
+
+
     private Skin skin;
     private HorizontalGroup currencyGroup;
     private Image coin;
     private Label currencyLabel;
     private HorizontalGroup plotInfoGroup;
-    private FarmScreenTable farmScreenTable;
     private ImageButton leftButton;
     private ImageButton rightButton;
     private TextButton shopButton;
@@ -92,8 +97,15 @@ public class FarmScreen extends GameScreen {
     private Label currentLevelLabel;
     private ProgressBar expBar;
 
+    private Table infoTable;
+    private FarmScreenWindow farmScreenWindow;
+
+    private Table confirmTable;
+    private ConfirmWindow confirmWindow;
+
+
     ArrayList<ScoreLabel> scoreLabels;
-    Stack<ScoreLabel> scoreLabelStack;
+    java.util.Stack<ScoreLabel> scoreLabelStack;
 
     WelcomeWindow welcomeWindow;
 
@@ -164,14 +176,16 @@ public class FarmScreen extends GameScreen {
         // UI initialization
         skin = game.getAssetHandler().getSkin();
 
+        uiStack = new Stack();
+        uiStack.setFillParent(true);
+
         currencyGroup = new HorizontalGroup();
         coin = new Image(game.getAssetHandler().getTextureRegion("coin4x"));
         currencyLabel = new Label("" + CurrencyManager.getAmount(), skin);
         currencyGroup.addActor(coin);
         currencyGroup.addActor(currencyLabel);
 
-        farmScreenTable = new FarmScreenTable(this, plots.get(0), skin);
-        farmScreenTable.setVisible(false);
+        farmScreenWindow = new FarmScreenWindow(this, plots.get(0), skin);
 
         leftButton = new ImageButton(skin, "left");
         leftButton.setScale(2);
@@ -243,9 +257,38 @@ public class FarmScreen extends GameScreen {
         priceGroup.addActor(priceLabel);
 
         scoreLabels = new ArrayList<>();
-        scoreLabelStack = new Stack<>();
+        scoreLabelStack = new java.util.Stack<>();
 
         gestureDetector = new GestureDetector(new FarmScreenInputProcessor(this));
+
+        UITable.remove();
+        stage.addActor(uiStack);
+        uiStack.add(UITable);
+
+        infoTable = new Table();
+        infoTable.setFillParent(true);
+        infoTable.add(farmScreenWindow)
+                .prefWidth(Value.percentWidth(0.5f, infoTable))
+                .prefHeight(Value.percentHeight(0.25f, infoTable))
+                .expand()
+                .bottom();
+
+
+        confirmWindow = new ConfirmWindow(
+                "Are you sure you want to clear this tree?", skin,
+                (Void v) -> {
+                    focusedPlot.clear();
+                    return null;
+                },
+                uiStack);
+
+        confirmTable = new Table();
+        confirmTable.setFillParent(true);
+        confirmTable.add(confirmWindow)
+                .prefWidth(Value.percentWidth(0.5f, infoTable))
+                .prefHeight(Value.percentHeight(0.5f, infoTable))
+                .center();
+
 
         // Sprite initialization
         sprout = game.getAssetHandler().getTextureRegion("plant8x");
@@ -324,8 +367,8 @@ public class FarmScreen extends GameScreen {
             plot.update();
         }
 
-        if (farmScreenTable.isVisible()) {
-            farmScreenTable.update();
+        if (farmScreenWindow.isVisible()) {
+            farmScreenWindow.update();
         }
 
         // Render map
@@ -484,13 +527,13 @@ public class FarmScreen extends GameScreen {
     }
 
     void showPlotInfoWindow(Plot plot) {
-        farmScreenTable.setPlot(plot);
-        farmScreenTable.setVisible(true);
+        farmScreenWindow.setPlot(plot);
+        uiStack.add(infoTable);
         focusOn(plot);
     }
 
     public void hidePlotInfoWindow() {
-        farmScreenTable.setVisible(false);
+        uiStack.removeActor(infoTable);
     }
 
     public void beginHarvest() {
@@ -574,18 +617,23 @@ public class FarmScreen extends GameScreen {
             UITable.add(welcomeWindow).width(Value.percentWidth(0.8f, UITable));
 
         else {
-            UITable.add(currencyGroup).colspan(4).center();
+            UITable.add(currencyGroup).colspan(2);
             UITable.row();
-            UITable.add(farmScreenTable).colspan(4).expand().bottom();
+            UITable.add(leftButton).expandY().left();
+            UITable.add(rightButton).expandY().right();
             UITable.row();
-            UITable.add(currentLevelLabel);
-            UITable.add(expBar).padTop(50).padBottom(15).width(Value.percentWidth(.5f, UITable)).height(25).expandX();
+            UITable.add(currentLevelLabel).left().colspan(2).expandX();
             UITable.row();
-            UITable.add(leftButton);
-            UITable.add(shopButton).size(150, 75).expandX();
-            UITable.add(statsButton).size(150, 75).expandX();
-            UITable.add(rightButton);
+            UITable.add(expBar).padTop(5).padBottom(15).width(Value.percentWidth(.9f, UITable)).height(25).colspan(2);
+            UITable.row();
+            UITable.add(shopButton).size(150, 75).right().padRight(10);
+            UITable.add(statsButton).size(150, 75).left().padLeft(10);
+            UITable.row();
         }
+    }
+
+    public void showConfirmWindow() {
+        uiStack.add(confirmTable);
     }
 
     private void showLockedUI() {

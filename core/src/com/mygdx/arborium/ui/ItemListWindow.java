@@ -21,8 +21,8 @@ public class ItemListWindow extends Window {
         buttonTable.setFillParent(true);
 
         scrollPane = new ScrollPane(buttonTable, skin);
-        scrollPane.setScrollbarsVisible(false);
-        scrollPane.setOverscroll(false, false);
+        scrollPane.setScrollbarsVisible(true);
+        scrollPane.setOverscroll(false, true);
 
         buttons = new ButtonGroup();
         buttons.setMaxCheckCount(1);
@@ -42,7 +42,7 @@ public class ItemListWindow extends Window {
         for (int i = 0; i < items.length; i++) {
             ItemButton upButton = new ItemButton(getSkin(), items[i]);
             buttons.add(upButton);
-            buttonTable.add(upButton).size(Value.percentWidth(0.15f, this)).pad(15);
+            buttonTable.add(upButton).size(Value.percentWidth(0.125f, this)).pad(15);
             if ((i + 1) % 4 == 0)
                 buttonTable.row();
         }

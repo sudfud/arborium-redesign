@@ -655,6 +655,23 @@ atlasData: {
 			customized: false
 			tenPatchData: null
 		}
+		{
+			file: C:/Users/Oliver/Desktop/Arborium/android/assets/skin/serif_outline_2.png
+			bgColor: {
+				r: 1
+				g: 1
+				b: 1
+				a: 1
+			}
+			tint: null
+			tintName: null
+			name: serif_outline_2
+			tiled: false
+			minWidth: -1
+			minHeight: -1
+			customized: false
+			tenPatchData: null
+		}
 	]
 }
 jsonData: {
@@ -725,6 +742,11 @@ jsonData: {
 			class: com.ray3k.skincomposer.data.FontData
 			name: serif_outline_16
 			file: C:/Users/Oliver/Desktop/Arborium/android/assets/skin/serif_outline_16.fnt
+		}
+		{
+			class: com.ray3k.skincomposer.data.FontData
+			name: serif_outline_2
+			file: C:/Users/Oliver/Desktop/Arborium/android/assets/skin/serif_outline_2.fnt
 		}
 	]
 	freeTypeFonts: []
@@ -2163,6 +2185,36 @@ jsonData: {
 					}
 				}
 				deletable: false
+				parent: null
+			}
+			{
+				class: com.ray3k.skincomposer.data.StyleData
+				name: large
+				clazz: com.badlogic.gdx.scenes.scene2d.ui.Label
+				properties: {
+					font: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.graphics.g2d.BitmapFont
+						name: font
+						optional: false
+						value: serif_outline_2
+					}
+					fontColor: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.graphics.Color
+						name: fontColor
+						optional: true
+						value: null
+					}
+					background: {
+						class: com.ray3k.skincomposer.data.StyleProperty
+						type: com.badlogic.gdx.scenes.scene2d.utils.Drawable
+						name: background
+						optional: true
+						value: null
+					}
+				}
+				deletable: true
 				parent: null
 			}
 		]

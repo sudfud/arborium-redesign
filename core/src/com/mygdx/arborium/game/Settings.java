@@ -3,7 +3,6 @@ package com.mygdx.arborium.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.math.Vector2;
 
 public class Settings {
     private static Preferences preferences;
@@ -15,17 +14,32 @@ public class Settings {
     private static boolean fullscreen;
     private static boolean soundOn;
     private static int resIndex;
+    
+    public static class Resolution {
+        public final int width;
+        public final int height;
+        
+        Resolution(int w, int h) {
+            width = w;
+            height = h;
+        }
+        
+        @Override
+        public String toString() {
+            return "" + width + "x" + height;
+        }
+    }
 
-    private static Vector2[] resolutions = {
-            new Vector2(800, 600),
-            new Vector2(1024, 768),
-            new Vector2(1280, 720),
-            new Vector2(1280, 800),
-            new Vector2(1280, 960),
-            new Vector2(1366, 768),
-            new Vector2(1440, 900),
-            new Vector2(1600, 900),
-            new Vector2(1920, 1080)
+    private static Resolution[] resolutions = {
+            new Resolution(800, 600),
+            new Resolution(1024, 768),
+            new Resolution(1280, 720),
+            new Resolution(1280, 800),
+            new Resolution(1280, 960),
+            new Resolution(1366, 768),
+            new Resolution(1440, 900),
+            new Resolution(1600, 900),
+            new Resolution(1920, 1080)
     };
 
     public static void init() {
@@ -52,7 +66,11 @@ public class Settings {
         save();
     }
 
-    public static Vector2[] getResolutions() {
+    public static Resolution getResolution() {
+        return resolutions[resIndex];
+    }
+
+    public static Resolution[] getResolutions() {
         return resolutions;
     }
 
@@ -74,10 +92,10 @@ public class Settings {
         preferences.flush();
     }
 
-    private static void update() {
-        Vector2 r = resolutions[resIndex];
+    public static void update() {
+        Resolution r = resolutions[resIndex];
 
-        Gdx.graphics.setWindowedMode((int)r.x, (int)r.y);
+        Gdx.graphics.setWindowedMode(r.width, r.height);
         if (fullscreen)
             Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
     }

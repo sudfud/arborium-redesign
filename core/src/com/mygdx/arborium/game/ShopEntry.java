@@ -32,6 +32,10 @@ public class ShopEntry {
     return price;
   }
 
+  public void setPrice(int p) {
+    price = p;
+  }
+
   public boolean isLocked() {
     return locked;
   }

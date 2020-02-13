@@ -46,8 +46,8 @@ public abstract class GameScreen implements Screen {
         float h = Gdx.graphics.getHeight();
 
         camera = new OrthographicCamera(30 * (w / h), 30);
-        if (Gdx.app.getType() == Application.ApplicationType.Desktop)
-            viewport = new ExtendViewport(1250, 1250, new OrthographicCamera());
+        if (Gdx.app.getType() == Application.ApplicationType.Desktop || Gdx.app.getType() == Application.ApplicationType.WebGL)
+            viewport = new ExtendViewport(1024, 1024, new OrthographicCamera());
         else
             viewport = new ExtendViewport(750, 750, new OrthographicCamera());
         viewport.update((int)w, (int)h);

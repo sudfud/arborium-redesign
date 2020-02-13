@@ -40,7 +40,7 @@ public class ItemManager {
 
         trees.add(new Tree(4, "Peach Tree",
                 "Maaade in Georgiaaaaaaa",
-                75 * 60 * 1000, 30 * 60 * 1000, 3, 100, 100,
+                75 * 60 * 1000, 30 * 60 * 1000, 3, 150, 100,
                 makeTreeSpriteArray("peach_tree", assetHandler),
                 assetHandler.getTextureRegion("peach8x")));
 
@@ -52,13 +52,13 @@ public class ItemManager {
 
         trees.add(new Tree(6, "Sour Green Apple Tree",
                 "An upgrade from the original sweet apple, some would say",
-                4 * 60 * 60 * 1000, 240 * 60 * 1000, 6, 500, 200,
+                4 * 60 * 60 * 1000, 240 * 60 * 1000, 6, 250, 200,
                 makeTreeSpriteArray(assetHandler.getTextureRegion("green_apple_tree8x"), assetHandler),
                 assetHandler.getTextureRegion("green_apple8x")));
 
         trees.add(new Tree(7, "Lychee Tree",
                 "Originally from China. The insides are sweet, and they like to grow in bunches.",
-                12 * 60 * 60 * 1000, 6 * 60 * 60 * 1000, 12, 600, 150,
+                12 * 60 * 60 * 1000, 6 * 60 * 60 * 1000, 12, 200, 150,
                 makeTreeSpriteArray(assetHandler.getTextureRegion("lychee_tree8x"), assetHandler),
                 assetHandler.getTextureRegion("lychee8x")));
 
@@ -76,7 +76,7 @@ public class ItemManager {
         fertilizers.add(new Fertilizer(33, "Speedy Seeds",
                 "Filled with electrolytes to make plants grow faster. Reduces grow time by 20%",
                 assetHandler.getTextureRegion("fertilizer8x"),
-                (plot) -> plot.setMatureTimeMultiplier(0.80f)));
+                (Plot plot) -> plot.setMatureTimeMultiplier(0.80f)));
 
         fertilizers.add(new Fertilizer(34, "Fruit by the Mile",
                 "Contains a small amount of mutagens genetically designed to increase yield. +1 to harvest amount.",
